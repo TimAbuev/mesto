@@ -2,5 +2,13 @@
   font-size: 18px;
   line-height: 22px;
   font-weight: 400;
-  margin: 16px 0 0 0;
+  margin: 9px 0 0 0;
+}
+
+@media screen and (max-width:700px){
+  .profile__busy {
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+  }
 }

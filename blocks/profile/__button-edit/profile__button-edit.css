@@ -2,15 +2,22 @@
   width: 24px;
   height: 24px;
   border: 1px solid white;
-  margin-top: 87px;
   margin-left: 18px;
   background-color: black;
   background-image: url(../../../images/PencilVector.svg);
   background-repeat: no-repeat;
   background-position: center center;
   cursor: pointer;
+  align-self: center;
 }
 .profile__button-edit:hover {
   opacity: 60%;
   transition: 0.3s;
+}
+@media screen and (max-width:700px) {
+  .profile__button-edit {
+    width: 18px;
+    height: 18px;
+    margin-left: 10px;
+  }
 }

@@ -9,9 +9,17 @@
   background-repeat: no-repeat;
   background-position: center center;
   cursor: pointer;
+  padding: 0;
 }
 
 .profile__button:hover {
   opacity: 60%;
   transition: 0.3s;
+}
+
+@media screen and (max-width: 700px){
+  .profile__button {
+    margin: 36px auto;
+    min-width: 282px;
+  }
 }
