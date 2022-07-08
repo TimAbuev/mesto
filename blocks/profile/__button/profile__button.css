@@ -2,4 +2,16 @@
   width: 150px;
   height: 50px;
   margin-top: 85px;
+  border: 2px solid white;
+  border-radius: 2%;
+  background-color: black;
+  background-image: url(../../../images/PlusVector.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  cursor: pointer;
+}
+
+.profile__button:hover {
+  opacity: 60%;
+  transition: 0.3s;
 }
