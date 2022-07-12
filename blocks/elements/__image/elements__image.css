@@ -1,0 +1,7 @@
+.elements__image {
+  width: 100%;
+  height: auto;
+
+  border-top-left-radius: 5%;
+  border-top-right-radius: 5%;
+}
