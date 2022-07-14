@@ -2,4 +2,8 @@
   background-color: white;
   border-radius: 5%;
   min-height: 361px;
+
+  /* text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden; */
 }
