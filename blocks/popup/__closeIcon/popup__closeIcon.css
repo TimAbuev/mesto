@@ -1,6 +1,8 @@
 .popup__closeIcon {
   border: none;
   background-image: url(../../../images/CloseIcon.svg);
+
+  object-fit: contain;
   background-color: black;
   position: absolute;
   top: -40px;
@@ -13,3 +15,11 @@
   opacity: 60%;
   transition: 0.3s;
 } 
+@media screen and (max-width: 700px){
+  .popup__closeIcon {
+    top: -35px;
+    right: 0px;
+    width: 20px;
+    height: 20px;
+  }
+}
