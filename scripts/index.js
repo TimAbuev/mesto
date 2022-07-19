@@ -1,6 +1,8 @@
-const buttonEdit = document.querySelector('.profile__button-edit');
 const popupBlock = document.querySelector('.popup');
+const profileJob = document.querySelector('.profile__busy');
+const profileName = document.querySelector('.profile__name');
 
+const buttonEdit = document.querySelector('.profile__button-edit');
 buttonEdit.addEventListener('click', function(){
   popupBlock.className = 'popup popup_opened';
 });
@@ -10,16 +12,20 @@ closeIcon.addEventListener('click', function(){
   popupBlock.className = 'popup';
 });
 
-
-const profileName = document.querySelector('.profile__name');
-const profileJob = document.querySelector('.profile__busy');
-const popupName = document.querySelector('.popup__name');
-const popupJob = document.querySelector('.popup__working');
-
-const buttonSave = document.querySelector('.popup__save');
-buttonSave.addEventListener('click', function(){
-  profileName.textContent = 's oshta';
+const formPopup = document.querySelector('.popup__form');
+function formSubmitHandler (evt) {
+  evt.preventDefault();
   popupBlock.className = 'popup';
-});
 
+  const popupName = document.querySelector('.popup__name');
+  let popupNameValue = popupName.getAttribute('value');
+  let popupNewName = popupName.setAttribute('value', 'test');
+
+  console.log(popupNewName);
+  console.log(popupNameValue);
+
+  profileName.textContent = popupNameValue;
+
+}
+formPopup.addEventListener('submit', formSubmitHandler);
 
