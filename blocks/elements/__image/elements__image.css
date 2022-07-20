@@ -1,7 +1,10 @@
 .elements__image {
   width: 100%;
+  max-width: 580px;
   height: auto;
+  max-height: 580px;
+  object-fit: cover;
 
-  border-top-left-radius: 5%;
-  border-top-right-radius: 5%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
