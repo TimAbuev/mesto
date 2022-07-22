@@ -1,20 +1,23 @@
 .popup__save {
+  background-color: transparent;
+  border: 0;
+  outline: none;
   width: 358px;
-  height: 50px;
+  min-height: 50px;
   color: white;
   background-color: black;
   margin: 48px 36px;
   padding: 0;
   cursor: pointer;
+  transition: 0.3s;
 }
 .popup__save:hover {
   opacity: 80%;
-  transition: 0.3s;
 }
 @media screen and (max-width: 700px){
   .popup__save {
     width: 238px;
-    height: 46px;
+    min-height: 46px;
     margin: 63px 0 25px 22px;
   }
 }
