@@ -4,3 +4,8 @@
   align-content: flex-end;
   justify-content: center;
 }
+@media screen and (max-width: 700px){
+  .profile__wrapper-extra {
+    margin-left: 25px;
+  }
+}
