@@ -5,4 +5,8 @@
   margin: auto;
   padding-left: 19px;
   padding-right: 19px;
+  
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
