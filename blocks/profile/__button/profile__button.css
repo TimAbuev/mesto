@@ -1,8 +1,8 @@
 .profile__button {
   background-color: transparent;
-  border: 0;
-  outline: none;
   border: 2px solid white;
+  outline: none;
+  min-width: 80px;
   width: 150px;
   min-height: 50px;
   margin-top: 85px;
