@@ -1,8 +1,10 @@
 .profile__button {
   background-color: transparent;
-  border: 0;
-  outline: none;
   border: 2px solid white;
+<<<<<<< HEAD
+=======
+  outline: none;
+>>>>>>> hotfix/blocks
   min-width: 80px;
   width: 150px;
   min-height: 50px;
