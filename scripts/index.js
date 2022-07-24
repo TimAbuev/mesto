@@ -21,12 +21,9 @@ function formEditHandler () {
   popupName.value = profileName.textContent;
   popupJob.value = profileJob.textContent;
 }
-function formCloseHandler () {
-  closePopup();
-}
 
 formPopup.addEventListener('submit', formSubmitHandler);
 buttonEdit.addEventListener('click', formEditHandler);
-closeIcon.addEventListener('click', formCloseHandler);
+closeIcon.addEventListener('click', closePopup);
 
 
