@@ -87,8 +87,20 @@
         </form>
       </div>
     </div>
+    <div class="popup-mesto">
+      <div class="popup-mesto__container">
+        <button class="popup-mesto__close-icon" type="button"></button>
+        <form class="popup-mesto__form" name="form-edit-profile">
+          <h2 class="popup-mesto__title">Новое место</h2>
+          <input type="text" class="popup-mesto__input popup-mesto__input_type_name" name="name" required placeholder="Название">
+          <input type="text" class="popup-mesto__input popup-mesto__input_type_link" name="job" required placeholder="Ссылка на картинку">
+          <button class="popup-mesto__save" type="submit">Создать</button>
+        </form>
+      </div>
+    </div>
   </div>
   <script src="scripts/index.js"></script>
+  <script src="scripts/popup-mesto.js"></script>
 </body>
 
 </html>
