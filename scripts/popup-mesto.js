@@ -6,8 +6,13 @@ const selectors = {
   buttonPlus: '.profile__button',
   blockPopup: '.popup-mesto',
   buttonClose: '.popup-mesto__close-icon',
-}
+  template: '.template-card',
+  divElementsCard: '.elements__card',
+  elementsTitle: '.elements__title',
+  elementsImage: '.elements__image',
+  trashButton: '.elements__trash',
 
+}
 const form = document.querySelector(selectors.form);
 const inputName = form.querySelector(selectors.inputName);
 const inputLink = form.querySelector(selectors.inputLink);
@@ -16,29 +21,24 @@ const buttonPlus = document.querySelector(selectors.buttonPlus);
 const blockPopup = document.querySelector(selectors.blockPopup);
 const buttonClose = document.querySelector(selectors.buttonClose);
 
-function addCard(name, src) {
-  const template = `    <div class="elements__card">
-  <img src="${name.link}" alt="" class="elements__image">
-  <button class="elements__trash"></button>
-  <div class="elements__wrapper">
-    <h2 class="elements__title">${name.name}</h2>
-    <button class="elements__like" type="button"></button>
-  </div>
-</div>`;
+function addCard(p1) {
+  const template = document.querySelector(selectors.template).content.querySelector(selectors.divElementsCard).cloneNode(true);
+  template.querySelector(selectors.elementsTitle).textContent = p1.name;
+  template.querySelector(selectors.elementsImage).setAttribute('src', p1.link);
 
-  list.insertAdjacentHTML('afterbegin', template);
+  template.querySelector(selectors.trashButton).addEventListener('click', function() {template.remove();})
+
+  list.appendChild(template);
 }
-function addNewCard(name, src) {
-  const template = `    <div class="elements__card">
-  <img src="${src}" alt="" class="elements__image">
-  <button class="elements__trash"></button>
-  <div class="elements__wrapper">
-    <h2 class="elements__title">${name}</h2>
-    <button class="elements__like" type="button"></button>
-  </div>
-</div>`;
 
-  list.insertAdjacentHTML('afterbegin', template);
+function addNewCard(name, src) {
+  const template = document.querySelector(selectors.template).content.querySelector(selectors.divElementsCard).cloneNode(true);
+  template.querySelector(selectors.elementsTitle).textContent = name;
+  template.querySelector(selectors.elementsImage).setAttribute('src', src);
+
+  template.querySelector(selectors.trashButton).addEventListener('click', function() {template.remove();})
+
+  list.appendChild(template);
 }
 
 function closePopup() {
@@ -91,5 +91,3 @@ function createInitialCards() {
 
 addEventListeners();
 createInitialCards();
-
-
