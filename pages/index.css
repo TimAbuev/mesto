@@ -30,7 +30,6 @@
 @import url(../blocks/popup/__input/popup__input.css);
 @import url(../blocks/popup/__save/popup__save.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
-
 @import url(../blocks/popup-mesto/popup-mesto.css);
 @import url(../blocks/popup-mesto/__close-icon/popup-mesto__close-icon.css);
 @import url(../blocks/popup-mesto/__container/popup-mesto__container.css);
@@ -39,5 +38,10 @@
 @import url(../blocks/popup-mesto/__save/popup-mesto__save.css);
 @import url(../blocks/popup-mesto/__title/popup-mesto__title.css);
 @import url(../blocks/popup-mesto/_opened/popup-mesto_opened.css);
+
+@import url(../blocks/popup-image/popup-image.css);
+@import url(../blocks/popup-image/__close-icon/);
+@import url(../blocks/popup-image/__image/popup-image__image.css);
+@import url(../blocks/popup-image/_opened/popup-image_opened.css);
 
 @import url(../blocks/elements/__wrapper/elements__wrapper.css);
