@@ -57,7 +57,7 @@ function addNewCard(name, src) {
     caption.textContent = name;
   })
 
-  list.appendChild(template);
+  list.insertBefore(template, list.firstChild);
 }
 
 function closePopup(p1, p2) {
