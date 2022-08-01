@@ -11,6 +11,11 @@ const selectors = {
   elementsTitle: '.elements__title',
   elementsImage: '.elements__image',
   trashButton: '.elements__trash',
+  wrapperButton: '.elements__button-wrapper',
+  blockPopupImage: '.popup-image',
+  buttonToCloseImg: '.popup-image__close-icon',
+  popopImageImage: '.popup-image__image',
+  caption: '.popup-image__caption',
 
 }
 const form = document.querySelector(selectors.form);
@@ -20,6 +25,10 @@ const list = document.querySelector(selectors.list);
 const buttonPlus = document.querySelector(selectors.buttonPlus);
 const blockPopup = document.querySelector(selectors.blockPopup);
 const buttonClose = document.querySelector(selectors.buttonClose);
+const blockPopupImage = document.querySelector(selectors.blockPopupImage);
+const buttonToCloseImg = blockPopupImage.querySelector(selectors.buttonToCloseImg);
+const popopImageImage = blockPopupImage.querySelector(selectors.popopImageImage);
+const caption = blockPopupImage.querySelector(selectors.caption);
 
 function addCard(p1) {
   const template = document.querySelector(selectors.template).content.querySelector(selectors.divElementsCard).cloneNode(true);
@@ -27,6 +36,11 @@ function addCard(p1) {
   template.querySelector(selectors.elementsImage).setAttribute('src', p1.link);
 
   template.querySelector(selectors.trashButton).addEventListener('click', function() {template.remove();})
+  template.querySelector(selectors.wrapperButton).addEventListener('click', function() {
+    blockPopupImage.className = 'popup-image popup-image_opened';
+    popopImageImage.setAttribute('src', p1.link);
+    caption.textContent = p1.name;
+  });
 
   list.appendChild(template);
 }
@@ -37,26 +51,36 @@ function addNewCard(name, src) {
   template.querySelector(selectors.elementsImage).setAttribute('src', src);
 
   template.querySelector(selectors.trashButton).addEventListener('click', function() {template.remove();})
+  template.querySelector(selectors.wrapperButton).addEventListener('click', function() {
+    blockPopupImage.className = 'popup-image popup-image_opened';
+    popopImageImage.setAttribute('src', src);
+    caption.textContent = name;
+  })
 
   list.appendChild(template);
 }
 
-function closePopup() {
-  blockPopup.className = 'popup-mesto';
+function closePopup(p1, p2) {
+  p1.className = 'popup-mesto';
+  p2.className = 'popup-image';
 }
 
 function addEventListeners() {
   form.addEventListener('submit', function(event) {
     event.preventDefault();
     addNewCard(inputName.value, inputLink.value);
-    closePopup();
+    closePopup(blockPopup, blockPopupImage);
   })
   buttonPlus.addEventListener('click', function() {
     blockPopup.className = 'popup-mesto popup-mesto_opened';
   })
   buttonClose.addEventListener('click', function() {
-    closePopup();
+    closePopup(blockPopup, blockPopupImage);
   })
+  buttonToCloseImg.addEventListener('click', function() {
+    closePopup(blockPopup, blockPopupImage);
+  });
+
 }
 
 function createInitialCards() {

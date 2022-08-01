@@ -3,7 +3,7 @@
   border-radius: 10px;
   min-height: 361px;
   position: relative;
-
+  max-width: 431px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
