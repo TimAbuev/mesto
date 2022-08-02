@@ -33,8 +33,10 @@ const caption = blockPopupImage.querySelector(selectors.caption);
 
 function addCard(p1) {
   const template = document.querySelector(selectors.template).content.querySelector(selectors.divElementsCard).cloneNode(true);
-  template.querySelector(selectors.elementsTitle).textContent = p1.name;
+  const elementsTitle = template.querySelector(selectors.elementsTitle);
+  elementsTitle.textContent = p1.name;
   template.querySelector(selectors.elementsImage).setAttribute('src', p1.link);
+  template.querySelector(selectors.elementsImage).setAttribute('alt', elementsTitle.textContent);
 
   template.querySelector(selectors.trashButton).addEventListener('click', function() {template.remove();})
   template.querySelector(selectors.wrapperButton).addEventListener('click', function() {
@@ -51,8 +53,10 @@ function addCard(p1) {
 
 function addNewCard(name, src) {
   const template = document.querySelector(selectors.template).content.querySelector(selectors.divElementsCard).cloneNode(true);
-  template.querySelector(selectors.elementsTitle).textContent = name;
+  const  elementsTitle = template.querySelector(selectors.elementsTitle);
+  elementsTitle.textContent = name;
   template.querySelector(selectors.elementsImage).setAttribute('src', src);
+  template.querySelector(selectors.elementsImage).setAttribute('alt', elementsTitle.textContent);
 
   template.querySelector(selectors.trashButton).addEventListener('click', function() {template.remove();})
   template.querySelector(selectors.wrapperButton).addEventListener('click', function() {
