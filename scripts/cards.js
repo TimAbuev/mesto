@@ -71,25 +71,25 @@ function addNewCard(name, src) {
   list.insertBefore(template, list.firstChild);
 }
 
-function closePopup(p1, p2) {
-  p1.className = 'popup-mesto';
-  p2.className = 'popup-image';
-}
+// function closePopup(p1, p2) {
+//   p1.className = 'popup-mesto';
+//   p2.className = 'popup-image';
+// }
 
 function addEventListeners() {
   form.addEventListener('submit', function(event) {
     event.preventDefault();
     addNewCard(inputName.value, inputLink.value);
-    closePopup(blockPopup, blockPopupImage);
+    closePopup(popup);
   })
   buttonPlus.addEventListener('click', function() {
-    blockPopup.className = 'popup-mesto popup-mesto_opened';
+    openPopup(popup);
   })
   buttonClose.addEventListener('click', function() {
-    closePopup(blockPopup, blockPopupImage);
+    closePopup(popup);
   })
   buttonToCloseImg.addEventListener('click', function() {
-    closePopup(blockPopup, blockPopupImage);
+    closePopup(popup);
   });
 
 }
