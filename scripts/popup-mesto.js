@@ -16,6 +16,7 @@ const selectors = {
   buttonToCloseImg: '.popup-image__close-icon',
   popopImageImage: '.popup-image__image',
   caption: '.popup-image__caption',
+  like: '.elements__like',
 
 }
 const form = document.querySelector(selectors.form);
@@ -41,6 +42,9 @@ function addCard(p1) {
     popopImageImage.setAttribute('src', p1.link);
     caption.textContent = p1.name;
   });
+  template.querySelector(selectors.like).addEventListener('click', function() {
+    template.querySelector(selectors.like).classList.toggle('elements__like_active');
+  });
 
   list.appendChild(template);
 }
@@ -56,6 +60,9 @@ function addNewCard(name, src) {
     popopImageImage.setAttribute('src', src);
     caption.textContent = name;
   })
+  template.querySelector(selectors.like).addEventListener('click', function() {
+    template.querySelector(selectors.like).classList.toggle('elements__like_active');
+  });
 
   list.insertBefore(template, list.firstChild);
 }
