@@ -89,6 +89,5 @@ function addEventListeners() {
 }
 
 
-addEventListeners();
-createInitialCards();
+
 

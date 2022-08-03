@@ -3,7 +3,7 @@ function addCard(p1) {
   const elementsTitle = newTemplate.querySelector(selectors.elementsTitle);
   elementsTitle.textContent = p1.name;
   newTemplate.querySelector(selectors.elementsImage).setAttribute('src', p1.link);
-  newTemplate.querySelector(selectors.elementsImage).setAttribute('alt', elementsTitle.textContent);
+  newTemplate.querySelector(selectors.elementsImage).setAttribute('alt', 'имя картинки вставлять');
 
   newTemplate.querySelector(selectors.trashButton).addEventListener('click', function() {newTemplate.remove();})
   newTemplate.querySelector(selectors.wrapperButton).addEventListener('click', function() {
@@ -23,7 +23,7 @@ function addNewCard(name, src) {
   const  elementsTitle = newTemplate.querySelector(selectors.elementsTitle);
   elementsTitle.textContent = name;
   newTemplate.querySelector(selectors.elementsImage).setAttribute('src', src);
-  newTemplate.querySelector(selectors.elementsImage).setAttribute('alt', elementsTitle.textContent);
+  newTemplate.querySelector(selectors.elementsImage).setAttribute('alt', 'имя картинки вставлять');
 
   newTemplate.querySelector(selectors.trashButton).addEventListener('click', function() {newTemplate.remove();})
   newTemplate.querySelector(selectors.wrapperButton).addEventListener('click', function() {
@@ -68,3 +68,5 @@ function createInitialCards() {
   initialCards.forEach((item) => addCard(item));
 }
 
+addEventListeners();
+createInitialCards();
