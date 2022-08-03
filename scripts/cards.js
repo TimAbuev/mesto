@@ -5,9 +5,9 @@ function addCard(p1) {
   newTemplate.querySelector(selectors.elementsImage).setAttribute('src', p1.link);
   newTemplate.querySelector(selectors.elementsImage).setAttribute('alt', elementsTitle.textContent);
 
-  newTemplate.querySelector(selectors.trashButton).addEventListener('click', function() {template.remove();})
+  newTemplate.querySelector(selectors.trashButton).addEventListener('click', function() {newTemplate.remove();})
   newTemplate.querySelector(selectors.wrapperButton).addEventListener('click', function() {
-    popupImage.className = 'popup-image popup-image_opened';
+    openPopup(popupImage);
     popopImageImage.setAttribute('src', p1.link);
     caption.textContent = p1.name;
   });
@@ -27,7 +27,7 @@ function addNewCard(name, src) {
 
   newTemplate.querySelector(selectors.trashButton).addEventListener('click', function() {newTemplate.remove();})
   newTemplate.querySelector(selectors.wrapperButton).addEventListener('click', function() {
-    popupImage.className = 'popup-image popup-image_opened';
+    openPopup(popupImage);
     popopImageImage.setAttribute('src', src);
     caption.textContent = name;
   })
@@ -37,20 +37,6 @@ function addNewCard(name, src) {
 
   list.insertBefore(newTemplate, list.firstChild);
 }
-
-function addEventListeners() {
-
-  buttonPlus.addEventListener('click', function() {
-    openPopup(popupMesto);
-  })
-  buttonClose.addEventListener('click', function() {
-    console.log('hey');
-    closePopup(popup);
-  })
-}
-
-
-
 
 function createInitialCards() {
   const initialCards = [
@@ -82,5 +68,3 @@ function createInitialCards() {
   initialCards.forEach((item) => addCard(item));
 }
 
-addEventListeners();
-createInitialCards();
