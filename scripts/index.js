@@ -5,7 +5,8 @@ const selectors = {
   popupImage: '.popup-image',
   buttonClose: '.popup__close-icon',
   buttonEdit: '.profile__button-edit',
-  form: '.popup-mesto__form',
+  form: '.popup__form',
+  formFromPopupMesto: 'popup-mesto__form',
   inputName: '.popup-mesto__input_type_name',
   inputLink: '.popup-mesto__input_type_link',
   list: '.elements',
@@ -21,7 +22,6 @@ const selectors = {
   like: '.elements__like',
 }
 
-const formPopup = document.querySelector('.popup__form');
 const profileName = document.querySelector('.profile__name');
 const popupProfileInputName = document.querySelector('.popup__input_type_name');
 const profileJob = document.querySelector('.profile__busy');
@@ -31,6 +31,7 @@ const popup = document.querySelector(selectors.popup);
 const popupProfile = document.querySelector(selectors.popupProfile);
 const popupImage = document.querySelector(selectors.popupImage);
 const form = document.querySelector(selectors.form);
+const formFromPopupMesto = document.querySelector(selectors.formFromPopupMesto);
 const inputName = form.querySelector(selectors.inputName);
 const inputLink = form.querySelector(selectors.inputLink);
 const list = document.querySelector(selectors.list);
@@ -62,10 +63,14 @@ function EditProfileForm () {
 }
 
 buttonEdit.addEventListener('click', EditProfileForm);
-formPopup.addEventListener('submit', handleProfileFormSubmit);
+form.addEventListener('submit', handleProfileFormSubmit);
 //buttonClose.addEventListener('click', () => closePopup(popup));
 
 
-
+formFromPopupMesto.addEventListener('submit', function(event) {
+  event.preventDefault();
+  addNewCard(inputName.value, inputLink.value);
+  closePopup(popup);
+})
 
 

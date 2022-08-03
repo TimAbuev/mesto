@@ -39,17 +39,13 @@ function addNewCard(name, src) {
 }
 
 function addEventListeners() {
-  form.addEventListener('submit', function(event) {
-    event.preventDefault();
-    addNewCard(inputName.value, inputLink.value);
-    closePopup(popup);
-  })
+
   buttonPlus.addEventListener('click', function() {
     openPopup(popupMesto);
   })
   buttonClose.addEventListener('click', function() {
     console.log('hey');
-    //closePopup(popup);
+    closePopup(popup);
   })
 
 }
