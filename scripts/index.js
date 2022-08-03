@@ -5,8 +5,9 @@ const selectors = {
   popupImage: '.popup-image',
   buttonClose: '.popup__close-icon',
   buttonEdit: '.profile__button-edit',
-  form: '.popup__form',
-  formFromPopupMesto: 'popup-mesto__form',
+    form: '.popup__form',
+  formFromPopupMesto: '.popup-mesto__form',
+  formFromPopupProfile: '.popup-profile__form',
   inputName: '.popup-mesto__input_type_name',
   inputLink: '.popup-mesto__input_type_link',
   list: '.elements',
@@ -20,20 +21,24 @@ const selectors = {
   popopImageImage: '.popup-image__image',
   caption: '.popup-image__caption',
   like: '.elements__like',
+  profileName: '.profile__name',
+  profileJob: '.profile__busy',
+  popupProfileInputName: '.popup__input_type_name',
+  popupProfileInputJob: '.popup__input_type_job'
 }
 
-const profileName = document.querySelector('.profile__name');
-const popupProfileInputName = document.querySelector('.popup__input_type_name');
-const profileJob = document.querySelector('.profile__busy');
-const popupProfileInputJob = document.querySelector('.popup__input_type_job');
-
+const popupProfileInputJob = document.querySelector(selectors.popupProfileInputJob);
+const popupProfileInputName = document.querySelector(selectors.popupProfileInputName);
+const profileJob = document.querySelector(selectors.profileJob);
+const profileName = document.querySelector(selectors.profileName);
 const popup = document.querySelector(selectors.popup);
 const popupProfile = document.querySelector(selectors.popupProfile);
 const popupImage = document.querySelector(selectors.popupImage);
 const form = document.querySelector(selectors.form);
 const formFromPopupMesto = document.querySelector(selectors.formFromPopupMesto);
-const inputName = form.querySelector(selectors.inputName);
-const inputLink = form.querySelector(selectors.inputLink);
+const formFromPopupProfile = document.querySelector(selectors.formFromPopupProfile);
+const inputName = document.querySelector(selectors.inputName);
+const inputLink = document.querySelector(selectors.inputLink);
 const list = document.querySelector(selectors.list);
 const buttonPlus = document.querySelector(selectors.buttonPlus);
 const popupMesto = document.querySelector(selectors.popupMesto);
@@ -50,27 +55,39 @@ function closePopup(p1) {
 function openPopup(p1) {
   p1.classList.add('popup_opened');
 }
-function handleProfileFormSubmit (evt) {
+function handleFormSubmit (evt) {
   evt.preventDefault();
-  profileName.textContent = popupProfileInputName.value;
-  profileJob.textContent = popupProfileInputJob.value;
   closePopup(popup);
 } 
-function EditProfileForm () {
-  openPopup(popup);
+
+form.addEventListener('submit', handleFormSubmit);
+
+formFromPopupProfile.addEventListener('submit', function() {
+  profileName.textContent = popupProfileInputName.value;
+  profileJob.textContent = popupProfileInputJob.value;
+});
+
+buttonEdit.addEventListener('click', function() {
+  openPopup(popupProfile);
   popupProfileInputName.value = profileName.textContent;
   popupProfileInputJob.value = profileJob.textContent;
-}
-
-buttonEdit.addEventListener('click', EditProfileForm);
-form.addEventListener('submit', handleProfileFormSubmit);
-//buttonClose.addEventListener('click', () => closePopup(popup));
-
+});
 
 formFromPopupMesto.addEventListener('submit', function(event) {
   event.preventDefault();
   addNewCard(inputName.value, inputLink.value);
   closePopup(popup);
-})
+});
+
+
+
+
+
+
+  
+
+
+
+
 
 

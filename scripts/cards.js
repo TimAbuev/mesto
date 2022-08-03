@@ -47,8 +47,10 @@ function addEventListeners() {
     console.log('hey');
     closePopup(popup);
   })
-
 }
+
+
+
 
 function createInitialCards() {
   const initialCards = [
