@@ -79,6 +79,8 @@ function addEventListeners() {
     evt.preventDefault();
     addNewCard(inputName.value, inputLink.value);
     closePopup(popupMesto);
+    inputName.value = '';
+    inputLink.value = '';
   });
   
   closeButtons.forEach((button) => {
