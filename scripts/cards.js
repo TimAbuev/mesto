@@ -1,72 +1,28 @@
-function addCard(p1) {
+function createCard(name, imageSrc) {
   const newTemplate = template.cloneNode(true);
   const elementsTitle = newTemplate.querySelector(selectors.elementsTitle);
-  elementsTitle.textContent = p1.name;
-  newTemplate.querySelector(selectors.elementsImage).setAttribute('src', p1.link);
-  newTemplate.querySelector(selectors.elementsImage).setAttribute('alt', 'имя картинки вставлять');
-
-  newTemplate.querySelector(selectors.trashButton).addEventListener('click', function() {newTemplate.remove();})
-  newTemplate.querySelector(selectors.wrapperButton).addEventListener('click', function() {
-    openPopup(popupImage);
-    popopImageImage.setAttribute('src', p1.link);
-    caption.textContent = p1.name;
-  });
-  newTemplate.querySelector(selectors.like).addEventListener('click', function() {
-    newTemplate.querySelector(selectors.like).classList.toggle('elements__like_active');
-  });
-
-  list.appendChild(newTemplate);
-}
-
-function addNewCard(name, src) {
-  const newTemplate = template.cloneNode(true);
-  const  elementsTitle = newTemplate.querySelector(selectors.elementsTitle);
   elementsTitle.textContent = name;
-  newTemplate.querySelector(selectors.elementsImage).setAttribute('src', src);
+  newTemplate.querySelector(selectors.elementsImage).setAttribute('src', imageSrc);
   newTemplate.querySelector(selectors.elementsImage).setAttribute('alt', 'имя картинки вставлять');
-
   newTemplate.querySelector(selectors.trashButton).addEventListener('click', function() {newTemplate.remove();})
   newTemplate.querySelector(selectors.wrapperButton).addEventListener('click', function() {
     openPopup(popupImage);
-    popopImageImage.setAttribute('src', src);
+    popopImageImage.setAttribute('src', imageSrc);
     caption.textContent = name;
-  })
+  });
   newTemplate.querySelector(selectors.like).addEventListener('click', function() {
     newTemplate.querySelector(selectors.like).classList.toggle('elements__like_active');
   });
-
-  list.insertBefore(newTemplate, list.firstChild);
+  return newTemplate;
 }
 
-function createInitialCards() {
-  const initialCards = [
-    {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-  ];
-  initialCards.forEach((item) => addCard(item));
+function addCard(name, link) {
+  const newCard = createCard(name, link);
+  list.prepend(newCard);
 }
+
+initialCards.forEach(function(item) {
+  addCard(item.name, item.link);
+})
 
 addEventListeners();
-createInitialCards();

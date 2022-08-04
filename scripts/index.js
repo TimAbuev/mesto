@@ -47,7 +47,32 @@ const popopImageImage = popupImage.querySelector(selectors.popopImageImage);
 const caption = popupImage.querySelector(selectors.caption);
 const buttonEdit = document.querySelector(selectors.buttonEdit);
 const template = document.querySelector(selectors.template).content.querySelector(selectors.divElementsCard);
-
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
 
 function closePopup(p1) {
   p1.classList.remove('popup_opened');
@@ -77,7 +102,7 @@ function addEventListeners() {
   
   formFromPopupMesto.addEventListener('submit', function(evt) {
     evt.preventDefault();
-    addNewCard(inputName.value, inputLink.value);
+    addCard(inputName.value, inputLink.value);
     closePopup(popupMesto);
     inputName.value = '';
     inputLink.value = '';
