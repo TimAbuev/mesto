@@ -26,3 +26,4 @@ initialCards.forEach(function(item) {
 })
 
 addEventListeners();
+
