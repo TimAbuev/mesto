@@ -6,7 +6,7 @@ const selectors = {
   closeButtons: '.popup__close-icon',
   buttonEdit: '.profile__button-edit',
     forms: '.popup__form',
-  formFromPopupMesto: '.popup__form_type_form-mesto',
+  //formFromPopupMesto: '.popup__form_type_form-mesto',
   formFromPopupProfile: '.popup__form_type_form-profile',
   inputName: '.popup__input_type_card-name',
   inputLink: '.popup__input_type_card-src',
@@ -35,7 +35,7 @@ const popup = document.querySelector(selectors.popup);
 const popupProfile = document.querySelector(selectors.popupProfile);
 const popupImage = document.querySelector(selectors.popupImage);
 const forms = document.querySelectorAll(selectors.forms);
-const formFromPopupMesto = document.querySelector(selectors.formFromPopupMesto);
+//const formFromPopupMesto = document.querySelector(selectors.formFromPopupMesto);
 const formFromPopupProfile = document.querySelector(selectors.formFromPopupProfile);
 const inputName = document.querySelector(selectors.inputName);
 const inputLink = document.querySelector(selectors.inputLink);
@@ -100,13 +100,8 @@ function addEventListeners() {
     closePopup(popupProfile);
   });
   
-  formFromPopupMesto.addEventListener('submit', function(evt) {
-    evt.preventDefault();
-    addCard(inputName.value, inputLink.value);
-    closePopup(popupMesto);
-    inputName.value = '';
-    inputLink.value = '';
-  });
+
+
   
   closeButtons.forEach((button) => {
     const popup = button.closest('.popup');

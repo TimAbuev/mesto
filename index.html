@@ -49,13 +49,13 @@
     <div class="popup popup-mesto">
       <div class="popup__container">
         <button class="popup__close-icon" type="button"></button>
-        <form class="popup__form popup__form_type_form-mesto" name="form-mesto-edit-profile">
+        <form class="popup__form popup__form_type_form-mesto" name="form-mesto" id="form-mesto">
           <h2 class="popup__title">Новое место</h2>
           <input type="text" class="popup__input popup__input_type_card-name popup__input_type_error" name="name" placeholder="Название"
-            required>
-          <input type="text" class="popup__input popup__input_type_card-src popup__input_type_error" name="link"
-            placeholder="Ссылка на картинку" required>
-          <button disabled class="popup__save popup__save_invalid" type="submit">Создать</button>
+             minlength="2" maxlength="30">
+          <input type="url" class="popup__input popup__input_type_card-src popup__input_type_error" name="link"
+            placeholder="Ссылка на картинку" >
+          <button  class="popup__save popup__save_valid" type="submit">Создать</button>
         </form>
       </div>
     </div>
