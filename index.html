@@ -38,18 +38,20 @@
     <div class="popup popup-profile">
       <div class="popup__container">
         <button class="popup__close-icon" type="button"></button>
-        <form class="popup__form popup__form_type_form-profile" name="form-edit-profile">
+        <form class="popup__form popup__form_type_form-profile" name="form-edit-profile" novalidate>
           <h2 class="popup__title">Редактировать профиль</h2>
-          <input type="text" class="popup__input popup__input_type_name popup__input_type_error" name="name" required>
-          <input type="text" class="popup__input popup__input_type_job popup__input_type_error" name="job" required>
-          <button disabled class="popup__save popup__save_invalid" type="submit">Сохранить</button>
+          <input type="text" class="popup__input popup__input_type_name" namde="name" minlength="2" maxlength="40" required>
+          <span class="error"></span>
+          <input type="text" class="popup__input popup__input_type_job" name="job" minlength="2" maxlength="200" required>
+          <span class="error"></span>
+          <button class="popup__save" type="submit">Сохранить</button>
         </form>
       </div>
     </div>
     <div class="popup popup-mesto">
       <div class="popup__container">
         <button class="popup__close-icon" type="button"></button>
-        <form class="popup__form popup__form_type_form-mesto" name="form-mesto" id="form-mesto" novalidate>
+        <form class="popup__form popup__form_type_form-mesto" name="form-mesto" novalidate>
           <h2 class="popup__title">Новое место</h2>
           <input type="text" class="popup__input popup__input_type_card-name" name="name"
             placeholder="Название" required minlength="2" maxlength="30">

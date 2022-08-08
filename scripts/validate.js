@@ -1,23 +1,13 @@
-const formMesto = {
-    form: '#form-mesto',
-    button: '.popup__save',
-
-}
-
-
 function enableValidation(selectors) {
     //1. найти форму в документе
     const form = document.querySelector(selectors.form)
     //2. установить слушатель сабмита
     form.addEventListener('submit', handleFormSubmit);
     form.addEventListener('input', (event) => handleFormInput(event, selectors));
-
 }
 
 function handleFormSubmit(event) {
     event.preventDefault();
-    addCard(inputName.value, inputLink.value);
-
     //1. Опредеоить валидность формы
     const form = event.currentTarget;
     const isValid = form.checkValidity();
@@ -45,7 +35,7 @@ function handleFormInput(event, selectors) {
     // 3. Включить ил отключить кнопку отправки формы
     setSubmitButtonState(form, selectors);
     // 44444. Подсветить или отсветить инпут
-    setInputState(input);
+    setInputState(input, selectors);
 }
 
 function setCustomError(input) {
@@ -82,7 +72,7 @@ function setSubmitButtonState(form, selectors) {
      
 }
 
-function setInputState(input) {
+function setInputState(input, selectors) {
     const isValid = input.checkValidity(); 
     // если строчка невалидная
     if (!isValid) {
@@ -95,27 +85,4 @@ function setInputState(input) {
 
 
 enableValidation(formMesto);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// formFromPopupMesto.addEventListener('submit', function(evt) {
-//     evt.preventDefault();
-    
-    
-
-//     // inputName.value = '';
-//     // inputLink.value = '';
-//   });
+enableValidation(formPopupProfile);

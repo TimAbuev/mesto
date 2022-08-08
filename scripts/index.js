@@ -6,7 +6,6 @@ const selectors = {
   closeButtons: '.popup__close-icon',
   buttonEdit: '.profile__button-edit',
     forms: '.popup__form',
-  //formFromPopupMesto: '.popup__form_type_form-mesto',
   formFromPopupProfile: '.popup__form_type_form-profile',
   inputName: '.popup__input_type_card-name',
   inputLink: '.popup__input_type_card-src',
@@ -26,6 +25,18 @@ const selectors = {
   popupProfileInputName: '.popup__input_type_name',
   popupProfileInputJob: '.popup__input_type_job'
 }
+const formMesto = {
+  form: '.popup__form_type_form-mesto',
+  button: '.popup__save',
+  //inputError: '.popup__input_type_error',
+
+}
+const formPopupProfile = {
+  form: '.popup__form_type_form-profile',
+  button: '.popup__save',
+  //inputError: '.popup__input_type_error',
+
+}
 
 const popupProfileInputJob = document.querySelector(selectors.popupProfileInputJob);
 const popupProfileInputName = document.querySelector(selectors.popupProfileInputName);
@@ -35,7 +46,7 @@ const popup = document.querySelector(selectors.popup);
 const popupProfile = document.querySelector(selectors.popupProfile);
 const popupImage = document.querySelector(selectors.popupImage);
 const forms = document.querySelectorAll(selectors.forms);
-//const formFromPopupMesto = document.querySelector(selectors.formFromPopupMesto);
+const formFromPopupMesto = document.querySelector(formMesto.form); 
 const formFromPopupProfile = document.querySelector(selectors.formFromPopupProfile);
 const inputName = document.querySelector(selectors.inputName);
 const inputLink = document.querySelector(selectors.inputLink);
@@ -74,35 +85,32 @@ const initialCards = [
   }
 ];
 
-function closePopup(p1) {
-  p1.classList.remove('popup_opened');
+
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
 }
-function openPopup(p1) {
-  p1.classList.add('popup_opened');
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
 }
 
 function addEventListeners() {
-
   buttonPlus.addEventListener('click', function() {
     openPopup(popupMesto);
   })
-
   buttonEdit.addEventListener('click', function() {
     openPopup(popupProfile);
     popupProfileInputName.value = profileName.textContent;
     popupProfileInputJob.value = profileJob.textContent;
   });
-  
-  formFromPopupProfile.addEventListener('submit', function(evt) {
-    evt.preventDefault();
+  formFromPopupProfile.addEventListener('submit', function() {
     profileName.textContent = popupProfileInputName.value;
     profileJob.textContent = popupProfileInputJob.value;
     closePopup(popupProfile);
   });
-  
-
-
-  
+  formFromPopupMesto.addEventListener('submit', function() {
+    addCard(inputName.value, inputLink.value);
+    closePopup(popupMesto);
+  }); 
   closeButtons.forEach((button) => {
     const popup = button.closest('.popup');
     button.addEventListener('click', () => closePopup(popup));
