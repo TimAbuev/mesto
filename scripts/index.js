@@ -23,21 +23,25 @@ const selectors = {
   profileName: '.profile__name',
   profileJob: '.profile__busy',
   popupProfileInputName: '.popup__input_type_name',
-  popupProfileInputJob: '.popup__input_type_job'
+  popupProfileInputJob: '.popup__input_type_job',
+  body: '.root',
+
 }
 const formMesto = {
   form: '.popup__form_type_form-mesto',
   button: '.popup__save',
-  //inputError: '.popup__input_type_error',
+  inputError: 'popup__input_type_error',
+  invalidButtonClass: 'popup__save_invalid',
 
 }
 const formPopupProfile = {
   form: '.popup__form_type_form-profile',
   button: '.popup__save',
-  //inputError: '.popup__input_type_error',
-
+  inputError: 'popup__input_type_error',
+  invalidButtonClass: 'popup__save_invalid',
 }
 
+const body = document.querySelector(selectors.body);
 const popupProfileInputJob = document.querySelector(selectors.popupProfileInputJob);
 const popupProfileInputName = document.querySelector(selectors.popupProfileInputName);
 const profileJob = document.querySelector(selectors.profileJob);
@@ -91,6 +95,9 @@ function closePopup(popup) {
 }
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  // body.addEventListener('click', function() {
+  //   closePopup(popup);
+  // });
 }
 
 function addEventListeners() {
@@ -115,8 +122,9 @@ function addEventListeners() {
     const popup = button.closest('.popup');
     button.addEventListener('click', () => closePopup(popup));
   });
-
+  
 }
+
 
 
 

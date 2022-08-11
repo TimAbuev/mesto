@@ -4,6 +4,8 @@ function enableValidation(selectors) {
     //2. установить слушатель сабмита
     form.addEventListener('submit', handleFormSubmit);
     form.addEventListener('input', (event) => handleFormInput(event, selectors));
+
+
 }
 
 function handleFormSubmit(event) {
@@ -62,11 +64,11 @@ function setSubmitButtonState(form, selectors) {
 
     if (isValid) {
         button.removeAttribute('disabled');
-        button.classList.remove('popup__save_invalid');
+        button.classList.remove(selectors.invalidButtonClass);
     }
     else {
         button.setAttribute('disabled', true);
-        button.classList.add('popup__save_invalid');
+        button.classList.add(selectors.invalidButtonClass);
     }
     
      
@@ -76,10 +78,10 @@ function setInputState(input, selectors) {
     const isValid = input.checkValidity(); 
     // если строчка невалидная
     if (!isValid) {
-        input.classList.add('popup__input_type_error');
+        input.classList.add(selectors.inputError);
     }
     else {
-        input.classList.remove('popup__input_type_error');
+        input.classList.remove(selectors.inputError);
     }
 }
 
