@@ -12,7 +12,7 @@ function createCard(name, imageSrc) {
     caption.textContent = name;
   });
   newTemplate.querySelector(selectors.like).addEventListener('click', function() {
-    newTemplate.querySelector(selectors.like).classList.toggle('elements__like_active');
+    newTemplate.querySelector(selectors.like).classList.toggle(selectors.likeActive);
   });
   return newTemplate;
 }

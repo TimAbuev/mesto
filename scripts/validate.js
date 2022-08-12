@@ -3,8 +3,11 @@ function enableValidation(selectors) {
     const form = document.querySelector(selectors.form)
     //2. установить слушатель сабмита
     form.addEventListener('submit', handleFormSubmit);
-    form.addEventListener('input', (event) => handleFormInput(event, selectors));
+    //form.addEventListener('input', (event) => handleFormInput(event, selectors));
 
+    form.addEventListener('input', function(event) {
+        handleFormInput(event, selectors)
+     });
 
 }
 
@@ -15,14 +18,9 @@ function handleFormSubmit(event) {
     const isValid = form.checkValidity();
     //2. Вывести алерт
     if (isValid) {
-        alert('Форм валидна');
         //3. Если формв валидна, то сбросим её
         form.reset();
     }
-    else {
-        alert('Форм невалидна')
-    }
-
     closePopup(popupMesto);
 }
 
@@ -71,7 +69,6 @@ function setSubmitButtonState(form, selectors) {
         button.classList.add(selectors.invalidButtonClass);
     }
     
-     
 }
 
 function setInputState(input, selectors) {
@@ -83,6 +80,7 @@ function setInputState(input, selectors) {
     else {
         input.classList.remove(selectors.inputError);
     }
+    
 }
 
 

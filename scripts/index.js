@@ -25,6 +25,8 @@ const selectors = {
   popupProfileInputName: '.popup__input_type_name',
   popupProfileInputJob: '.popup__input_type_job',
   body: '.root',
+  openedPopup: 'popup_opened',
+  likeActive: 'elements__like_active',
 
 }
 const formMesto = {
@@ -91,13 +93,10 @@ const initialCards = [
 
 
 function closePopup(popup) {
-  popup.classList.remove('popup_opened');
+  popup.classList.remove(selectors.openedPopup);
 }
 function openPopup(popup) {
-  popup.classList.add('popup_opened');
-  // body.addEventListener('click', function() {
-  //   closePopup(popup);
-  // });
+  popup.classList.add(selectors.openedPopup);
 }
 
 function addEventListeners() {
@@ -122,8 +121,18 @@ function addEventListeners() {
     const popup = button.closest('.popup');
     button.addEventListener('click', () => closePopup(popup));
   });
-  
+  body.addEventListener('mousedown', function(evt) {
+    if (evt.target.classList.contains(selectors.openedPopup)) {
+      closePopup(evt.target);
+    }
+    console.log('body_click');
+  });
+
 }
+
+
+
+
 
 
 
