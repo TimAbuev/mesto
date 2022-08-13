@@ -26,6 +26,7 @@ const selectors = {
   popupProfileInputJob: '.popup__input_type_job',
   body: '.root',
   openedPopup: 'popup_opened',
+  activePopup: '.popup_opened',
   likeActive: 'elements__like_active',
 
 }
@@ -94,9 +95,11 @@ const initialCards = [
 
 function closePopup(popup) {
   popup.classList.remove(selectors.openedPopup);
+  document.removeEventListener('keyup', handleEscUp);
 }
 function openPopup(popup) {
   popup.classList.add(selectors.openedPopup);
+  document.addEventListener('keyup', handleEscUp);
 }
 
 function addEventListeners() {
@@ -124,16 +127,18 @@ function addEventListeners() {
   body.addEventListener('mousedown', function(evt) {
     if (evt.target.classList.contains(selectors.openedPopup)) {
       closePopup(evt.target);
-    }
-    console.log('body_click');
+    }   
   });
-
+   
 }
 
-
-
-
-
+function handleEscUp(evt) {
+  //evt.preventDefault();
+  if (evt.key === 'Escape') {
+    const active = document.querySelector(selectors.activePopup);
+    closePopup(active);
+  }
+}
 
 
 
