@@ -125,9 +125,9 @@ function addEventListeners() {
     button.addEventListener('click', () => closePopup(popup));
   });
   body.addEventListener('mousedown', function(evt) {
-    if (evt.target.classList.contains(selectors.openedPopup)) {
+    
       closePopup(evt.target);
-    }   
+      
   });
    
 }

@@ -3,8 +3,8 @@ function enableValidation(selectors) {
     const form = document.querySelector(selectors.form)
     //2. установить слушатель сабмита
     form.addEventListener('submit', handleFormSubmit);
-    //form.addEventListener('input', (event) => handleFormInput(event, selectors));
 
+    //form.addEventListener('input', (event) => handleFormInput(event, selectors));
     form.addEventListener('input', function(event) {
         handleFormInput(event, selectors)
      });
@@ -16,9 +16,9 @@ function handleFormSubmit(event) {
     //1. Опредеоить валидность формы
     const form = event.currentTarget;
     const isValid = form.checkValidity();
-    //2. Вывести алерт
+
     if (isValid) {
-        //3. Если формв валидна, то сбросим её
+        //3. Если форма валидна, то сбросим её
         form.reset();
     }
     closePopup(popupMesto);
@@ -43,7 +43,7 @@ function setCustomError(input) {
 
     input.setCustomValidity('');
     if (validity.tooShort) {
-        input.setCustomValidity('ВВод слишком короткий');
+        input.setCustomValidity('ВВод слишком короткий yaho ooooo ooooooo ooooooooo ooooooooooooooooooo oooooooo fffffffff ffffffffff ffffffffffff ffffffffff fffffffffffff ffffff');
     }
     if (validity.tooLong) {
         input.setCustomValidity('ВВод слишком длиный');
