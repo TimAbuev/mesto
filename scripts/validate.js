@@ -13,12 +13,11 @@ function enableValidation(selectors) {
 
 function handleFormSubmit(event) {
     event.preventDefault();
-    //1. Опредеоить валидность формы
+    //1. Определить валидность формы
     const form = event.currentTarget;
     const isValid = form.checkValidity();
 
     if (isValid) {
-        //3. Если форма валидна, то сбросим её
         form.reset();
     }
     closePopup(popupMesto);
@@ -34,7 +33,7 @@ function handleFormInput(event, selectors) {
     showFieldError(input);
     // 3. Включить ил отключить кнопку отправки формы
     setSubmitButtonState(form, selectors);
-    // 44444. Подсветить или отсветить инпут
+    // 4. Подсветить или отсветить инпут
     setInputState(input, selectors);
 }
 

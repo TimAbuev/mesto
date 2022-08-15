@@ -92,6 +92,13 @@ const initialCards = [
   }
 ];
 
+function handleEscUp(evt) {
+  evt.preventDefault();
+  if (evt.key === 'Escape') {
+    const active = document.querySelector(selectors.activePopup);
+    closePopup(active);
+  }
+}
 
 function closePopup(popup) {
   popup.classList.remove(selectors.openedPopup);
@@ -132,13 +139,7 @@ function addEventListeners() {
    
 }
 
-function handleEscUp(evt) {
-  //evt.preventDefault();
-  if (evt.key === 'Escape') {
-    const active = document.querySelector(selectors.activePopup);
-    closePopup(active);
-  }
-}
+
 
 
 
