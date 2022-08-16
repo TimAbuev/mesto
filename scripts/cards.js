@@ -19,7 +19,7 @@ function createCard(name, imageSrc) {
 
 function addCard(name, link) {
   const newCard = createCard(name, link);
-  list.prepend(newCard);
+  cardsContainer.prepend(newCard);
 }
 
 initialCards.forEach(function(item) {
@@ -27,4 +27,6 @@ initialCards.forEach(function(item) {
 })
 
 addEventListeners();
+
+
 

@@ -9,7 +9,7 @@ const selectors = {
   formFromPopupProfile: '.popup__form_type_form-profile',
   inputName: '.popup__input_type_card-name',
   inputLink: '.popup__input_type_card-src',
-  list: '.elements',
+  cardsContainer: '.elements',
   buttonPlus: '.profile__button',
   template: '.template-card',
   divElementsCard: '.elements__card',
@@ -57,7 +57,7 @@ const formFromPopupMesto = document.querySelector(formMesto.form);
 const formFromPopupProfile = document.querySelector(selectors.formFromPopupProfile);
 const inputName = document.querySelector(selectors.inputName);
 const inputLink = document.querySelector(selectors.inputLink);
-const list = document.querySelector(selectors.list);
+const cardsContainer = document.querySelector(selectors.cardsContainer);
 const buttonPlus = document.querySelector(selectors.buttonPlus);
 const popupMesto = document.querySelector(selectors.popupMesto);
 const closeButtons = document.querySelectorAll(selectors.closeButtons);
