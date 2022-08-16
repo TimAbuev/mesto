@@ -1,3 +1,5 @@
+
+
 function enableValidation(selectors) {
     //1. найти форму в документе
     const form = document.querySelector(selectors.form)
