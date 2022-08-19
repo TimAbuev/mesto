@@ -96,11 +96,7 @@ function openPopup(popup) {
 function handleFormSubmit(event) {
   event.preventDefault();
   const form = event.currentTarget;
-  const isValid = form.checkValidity();
-  console.log(isValid);
-  if (isValid) {
-      form.reset();
-  }
+  form.reset();
   const active = document.querySelector(selectors.activePopup);
   closePopup(active);
 }
