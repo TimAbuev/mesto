@@ -1,29 +1,38 @@
-
+// const formMesto = {
+//     form: '.popup__form_type_form-mesto',
+//     button: '.popup__save',
+//     inputError: 'popup__input_type_error',
+//     invalidButtonClass: 'popup__save_invalid',
+  
+//   }
+//   const formPopupProfile = {
+//     form: '.popup__form_type_form-profile',
+//     button: '.popup__save',
+//     inputError: 'popup__input_type_error',
+//     invalidButtonClass: 'popup__save_invalid',
+//   }
 
 function enableValidation(selectors) {
-    //1. найти форму в документе
-    const form = document.querySelector(selectors.form)
-    //2. установить слушатель сабмита
-    form.addEventListener('submit', handleFormSubmit);
-
-    //form.addEventListener('input', (event) => handleFormInput(event, selectors));
-    form.addEventListener('input', function(event) {
-        handleFormInput(event, selectors)
-     });
-
+    const collectionForm = document.querySelectorAll(selectors.forms);
+    collectionForm.forEach(function(currentValue) {
+        currentValue.addEventListener('input', function(event) {
+            handleFormInput(event, selectors)
+        })
+    })
+    //form.addEventListener('submit', handleFormSubmit);
+    //form.addEventListener('input', (event) => handleFormInput(event, selectors));    
 }
 
-function handleFormSubmit(event) {
-    event.preventDefault();
-    //1. Определить валидность формы
-    const form = event.currentTarget;
-    const isValid = form.checkValidity();
+// function handleFormSubmit(event) {
+//     //1. Определить валидность формы
+//     const form = event.currentTarget;
+//     const isValid = form.checkValidity();
 
-    if (isValid) {
-        form.reset();
-    }
-    closePopup(popupMesto);
-}
+//     if (isValid) {
+//         form.reset();
+//     }
+//     closePopup(popupMesto);
+// }
 
 function handleFormInput(event, selectors) {
     const input = event.target;
@@ -39,18 +48,18 @@ function handleFormInput(event, selectors) {
     setInputState(input, selectors);
 }
 
-function setCustomError(input) {
-    const validity = input.validity;
+// function setCustomError(input) {
+//     const validity = input.validity;
 
-    input.setCustomValidity('');
-    if (validity.tooShort) {
-        input.setCustomValidity('ВВод слишком короткий yaho ooooo ooooooo ooooooooo ooooooooooooooooooo oooooooo fffffffff ffffffffff ffffffffffff ffffffffff fffffffffffff ffffff');
-    }
-    if (validity.tooLong) {
-        input.setCustomValidity('ВВод слишком длиный');
-    }
+//     input.setCustomValidity('');
+//     if (validity.tooShort) {
+//         input.setCustomValidity('ВВод слишком короткий yaho ooooo ooooooo ooooooooo ooooooooooooooooooo oooooooo fffffffff ffffffffff ffffffffffff ffffffffff fffffffffffff ffffff');
+//     }
+//     if (validity.tooLong) {
+//         input.setCustomValidity('ВВод слишком длиный');
+//     }
 
-}
+// }
 
 function showFieldError(input) {
     const span = input.nextElementSibling;
@@ -84,6 +93,10 @@ function setInputState(input, selectors) {
     
 }
 
-
-enableValidation(formMesto);
-enableValidation(formPopupProfile);
+enableValidation({
+    forms: '.popup__form',
+    button: '.popup__save',
+    inputError: 'popup__input_type_error',
+    invalidButtonClass: 'popup__save_invalid',
+});
+//enableValidation(formPopupProfile);

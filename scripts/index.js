@@ -5,7 +5,7 @@ const selectors = {
   popupImage: '.popup-image',
   closeButtons: '.popup__close-icon',
   buttonEdit: '.profile__button-edit',
-    forms: '.popup__form',
+    //forms: '.popup__form',
   formFromPopupProfile: '.popup__form_type_form-profile',
   inputName: '.popup__input_type_card-name',
   inputLink: '.popup__input_type_card-src',
@@ -27,21 +27,9 @@ const selectors = {
   openedPopup: 'popup_opened',
   activePopup: '.popup_opened',
   likeActive: 'elements__like_active',
+  formFromPopupMesto: '.popup__form_type_form-mesto',
+}
 
-}
-const formMesto = {
-  form: '.popup__form_type_form-mesto',
-  button: '.popup__save',
-  inputError: 'popup__input_type_error',
-  invalidButtonClass: 'popup__save_invalid',
-
-}
-const formPopupProfile = {
-  form: '.popup__form_type_form-profile',
-  button: '.popup__save',
-  inputError: 'popup__input_type_error',
-  invalidButtonClass: 'popup__save_invalid',
-}
 
 const popupProfileInputJob = document.querySelector(selectors.popupProfileInputJob);
 const popupProfileInputName = document.querySelector(selectors.popupProfileInputName);
@@ -50,8 +38,8 @@ const profileName = document.querySelector(selectors.profileName);
 const popup = document.querySelector(selectors.popup);
 const popupProfile = document.querySelector(selectors.popupProfile);
 const popupImage = document.querySelector(selectors.popupImage);
-const forms = document.querySelectorAll(selectors.forms);
-const formFromPopupMesto = document.querySelector(formMesto.form); 
+//const forms = document.querySelectorAll(selectors.forms);
+const formFromPopupMesto = document.querySelector(selectors.formFromPopupMesto); 
 const formFromPopupProfile = document.querySelector(selectors.formFromPopupProfile);
 const inputName = document.querySelector(selectors.inputName);
 const inputLink = document.querySelector(selectors.inputLink);
@@ -116,12 +104,14 @@ function addEventListeners() {
     popupProfileInputName.value = profileName.textContent;
     popupProfileInputJob.value = profileJob.textContent;
   });
-  formFromPopupProfile.addEventListener('submit', function() {
+  formFromPopupProfile.addEventListener('submit', function(evt) {
+    evt.preventDefault();
     profileName.textContent = popupProfileInputName.value;
     profileJob.textContent = popupProfileInputJob.value;
     closePopup(popupProfile);
   });
-  formFromPopupMesto.addEventListener('submit', function() {
+  formFromPopupMesto.addEventListener('submit', function(evt) {
+    evt.preventDefault();
     addCard(inputName.value, inputLink.value);
     closePopup(popupMesto);
   }); 
@@ -140,27 +130,6 @@ function addEventListeners() {
   closePopupByOverlay(popupProfile);
   closePopupByOverlay(popupMesto);
   closePopupByOverlay(popupImage);
-
-
-  // popupProfile.addEventListener('mousedown', function(evt) {
-  //   if(evt.target.classList.contains(selectors.openedPopup)) {
-  //     console.log('click');
-  //     closePopup(evt.target);
-  //   }          
-  // });
-  // popupMesto.addEventListener('mousedown', function(evt) {
-  //   if(evt.target.classList.contains(selectors.openedPopup)) {
-  //     console.log('click');
-  //     closePopup(evt.target);
-  //   }          
-  // });
-  // popupImage.addEventListener('mousedown', function(evt) {
-  //   if(evt.target.classList.contains(selectors.openedPopup)) {
-  //     console.log('click');
-  //     closePopup(evt.target);
-  //   }          
-  // });
-   
 
 } //End of addEventListeners()
 
