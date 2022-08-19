@@ -1,38 +1,11 @@
-// const formMesto = {
-//     form: '.popup__form_type_form-mesto',
-//     button: '.popup__save',
-//     inputError: 'popup__input_type_error',
-//     invalidButtonClass: 'popup__save_invalid',
-  
-//   }
-//   const formPopupProfile = {
-//     form: '.popup__form_type_form-profile',
-//     button: '.popup__save',
-//     inputError: 'popup__input_type_error',
-//     invalidButtonClass: 'popup__save_invalid',
-//   }
-
 function enableValidation(selectors) {
     const collectionForm = document.querySelectorAll(selectors.forms);
     collectionForm.forEach(function(currentValue) {
         currentValue.addEventListener('input', function(event) {
             handleFormInput(event, selectors)
         })
-    })
-    //form.addEventListener('submit', handleFormSubmit);
-    //form.addEventListener('input', (event) => handleFormInput(event, selectors));    
+    }) 
 }
-
-// function handleFormSubmit(event) {
-//     //1. Определить валидность формы
-//     const form = event.currentTarget;
-//     const isValid = form.checkValidity();
-
-//     if (isValid) {
-//         form.reset();
-//     }
-//     closePopup(popupMesto);
-// }
 
 function handleFormInput(event, selectors) {
     const input = event.target;
@@ -41,7 +14,7 @@ function handleFormInput(event, selectors) {
     // 1. Установить кастомные тексты ошибок
     //setCustomError(input);
     // 2. Показать ошибки в контейнере под полем
-    showFieldError(input);
+    showFieldError(input, form, selectors);
     // 3. Включить ил отключить кнопку отправки формы
     setSubmitButtonState(form, selectors);
     // 4. Подсветить или отсветить инпут
@@ -61,8 +34,8 @@ function handleFormInput(event, selectors) {
 
 // }
 
-function showFieldError(input) {
-    const span = input.nextElementSibling;
+function showFieldError(input, form, selectors) {
+    const span = form.querySelector(selectors.spanError);
     span.textContent = input.validationMessage;
 }
 
@@ -93,10 +66,13 @@ function setInputState(input, selectors) {
     
 }
 
+
+
 enableValidation({
     forms: '.popup__form',
     button: '.popup__save',
     inputError: 'popup__input_type_error',
     invalidButtonClass: 'popup__save_invalid',
+    spanError: '.error',
+
 });
-//enableValidation(formPopupProfile);

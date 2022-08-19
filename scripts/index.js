@@ -30,7 +30,6 @@ const selectors = {
   formFromPopupMesto: '.popup__form_type_form-mesto',
 }
 
-
 const popupProfileInputJob = document.querySelector(selectors.popupProfileInputJob);
 const popupProfileInputName = document.querySelector(selectors.popupProfileInputName);
 const profileJob = document.querySelector(selectors.profileJob);
@@ -94,6 +93,17 @@ function openPopup(popup) {
   popup.classList.add(selectors.openedPopup);
   document.addEventListener('keyup', handleEscUp);
 }
+function handleFormSubmit(event) {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const isValid = form.checkValidity();
+  console.log(isValid);
+  if (isValid) {
+      form.reset();
+  }
+  const active = document.querySelector(selectors.activePopup);
+  closePopup(active);
+}
 
 function addEventListeners() {
   buttonPlus.addEventListener('click', function() {
@@ -104,17 +114,17 @@ function addEventListeners() {
     popupProfileInputName.value = profileName.textContent;
     popupProfileInputJob.value = profileJob.textContent;
   });
-  formFromPopupProfile.addEventListener('submit', function(evt) {
-    evt.preventDefault();
+
+  formFromPopupProfile.addEventListener('submit', function(event) {      
     profileName.textContent = popupProfileInputName.value;
     profileJob.textContent = popupProfileInputJob.value;
-    closePopup(popupProfile);
+    handleFormSubmit(event);
   });
-  formFromPopupMesto.addEventListener('submit', function(evt) {
-    evt.preventDefault();
+  formFromPopupMesto.addEventListener('submit', function(event) {
     addCard(inputName.value, inputLink.value);
-    closePopup(popupMesto);
+    handleFormSubmit(event);
   }); 
+
   closeButtons.forEach((button) => {
     const popup = button.closest('.popup');
     button.addEventListener('click', () => closePopup(popup));
@@ -122,7 +132,6 @@ function addEventListeners() {
   function closePopupByOverlay(popup) {
     popup.addEventListener('mousedown', function(evt) {
       if(evt.target.classList.contains(selectors.openedPopup)) {
-        console.log('click');
         closePopup(evt.target);
       } 
     })
