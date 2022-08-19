@@ -10,13 +10,13 @@ function enableValidation(selectors) {
 function handleFormInput(event, selectors) {
     const input = event.target;
     const form = event.currentTarget;
-
+    const button = form.querySelector(selectors.button);
     // 1. Установить кастомные тексты ошибок
     //setCustomError(input);
     // 2. Показать ошибки в контейнере под полем
     showFieldError(input, form, selectors);
     // 3. Включить ил отключить кнопку отправки формы
-    setSubmitButtonState(form, selectors);
+    setSubmitButtonState(form, selectors, button);
     // 4. Подсветить или отсветить инпут
     setInputState(input, selectors);
 }
@@ -39,8 +39,7 @@ function showFieldError(input, form, selectors) {
     span.textContent = input.validationMessage;
 }
 
-function setSubmitButtonState(form, selectors) {
-    const button = form.querySelector(selectors.button);
+function setSubmitButtonState(form, selectors, button) {
     const isValid = form.checkValidity();
 
     if (isValid) {
@@ -65,7 +64,6 @@ function setInputState(input, selectors) {
     }
     
 }
-
 
 
 enableValidation({
