@@ -39,16 +39,24 @@ function showFieldError(input, form, selectors) {
     span.textContent = input.validationMessage;
 }
 
+
+function disabledSubmitButton(button, selectors) {
+    button.setAttribute('disabled', true);
+    button.classList.add(selectors.invalidButtonClass);
+}
+function enableSubmitButton(button, selectors) {
+    button.removeAttribute('disabled');
+    button.classList.remove(selectors.invalidButtonClass);
+}
+
 function setSubmitButtonState(form, selectors, button) {
     const isValid = form.checkValidity();
 
     if (isValid) {
-        button.removeAttribute('disabled');
-        button.classList.remove(selectors.invalidButtonClass);
+        enableSubmitButton(button, selectors);
     }
     else {
-        button.setAttribute('disabled', true);
-        button.classList.add(selectors.invalidButtonClass);
+        disabledSubmitButton(button, selectors);
     }
     
 }
