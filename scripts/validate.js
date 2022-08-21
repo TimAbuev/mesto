@@ -14,7 +14,7 @@ function handleFormInput(event, selectors) {
     // 1. Установить кастомные тексты ошибок
     //setCustomError(input);
     // 2. Показать ошибки в контейнере под полем
-    showFieldError(input, form, selectors);
+    showFieldError(input, form);
     // 3. Включить ил отключить кнопку отправки формы
     setSubmitButtonState(form, selectors, button);
     // 4. Подсветить или отсветить инпут
@@ -34,8 +34,8 @@ function handleFormInput(event, selectors) {
 
 // }
 
-function showFieldError(input, form, selectors) {
-    const span = form.querySelector(selectors.spanError);
+function showFieldError(input, form) {
+    const span = form.querySelector(`.${input.id}-error`);
     span.textContent = input.validationMessage;
 }
 
