@@ -114,15 +114,12 @@ function addEventListeners() {
     event.preventDefault();     
     profileName.textContent = popupProfileInputName.value;
     profileJob.textContent = popupProfileInputJob.value;
-    const form = event.currentTarget;
-    form.reset();
     closePopup(popupProfile);
   });
   formFromPopupMesto.addEventListener('submit', function(event) {
     event.preventDefault();
     addCard(inputName.value, inputLink.value);
-    const form = event.currentTarget;
-    form.reset();
+    formFromPopupMesto.reset();
     closePopup(popupMesto);
   }); 
   closeButtons.forEach((button) => {
