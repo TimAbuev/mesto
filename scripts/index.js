@@ -32,8 +32,6 @@ const selectors = {
   invalidButtonClass: 'popup__save_invalid',
 }
 
-
-
 const popupProfileInputJob = document.querySelector(selectors.popupProfileInputJob);
 const popupProfileInputName = document.querySelector(selectors.popupProfileInputName);
 const profileJob = document.querySelector(selectors.profileJob);
@@ -89,7 +87,6 @@ function handleEscUp(evt) {
     closePopup(active);
   }
 }
-
 function closePopup(popup) {
   popup.classList.remove(selectors.openedPopup);
   document.removeEventListener('keyup', handleEscUp);
@@ -98,7 +95,6 @@ function openPopup(popup) {
   popup.classList.add(selectors.openedPopup);
   document.addEventListener('keyup', handleEscUp);
 }
-
 function addEventListeners() {
 
   buttonPlus.addEventListener('click', function() {
