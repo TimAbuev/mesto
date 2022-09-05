@@ -1,3 +1,9 @@
+class FormValidator {
+    constructor(selectors, form) {
+
+    }
+}
+
 function enableValidation(selectors) {
     const collectionForm = document.querySelectorAll(selectors.forms);
     collectionForm.forEach(function(currentValue) {
@@ -38,7 +44,6 @@ function showFieldError(input, form) {
     const span = form.querySelector(`.${input.id}-error`);
     span.textContent = input.validationMessage;
 }
-
 
 function disabledSubmitButton(button, selectors) {
     button.setAttribute('disabled', true);

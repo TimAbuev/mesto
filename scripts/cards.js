@@ -3,10 +3,10 @@ class Card {
     this._text = data.name;
     this._image = data.link;
     this._template = template;
-    //this._removeElement = this._removeElement.bind(this);
   }
   _getElement() {
-    const newTemplate = document.querySelector(this._template).content.querySelector(selectors.divElementsCard)
+    const newTemplate = document.querySelector(this._template).content.
+    querySelector(selectors.divElementsCard)
     .cloneNode(true);
     return newTemplate;
   }
@@ -35,7 +35,6 @@ class Card {
     this._element.querySelector(selectors.like).classList.toggle(selectors.likeActive);
   }
   _removeElement = () => {
-    console.log(this._element);
     this._element.remove();
   } 
 }
@@ -46,8 +45,7 @@ function addCard(name, link) {
 }
 
 function createCard(name, link) {
-  const card = new Card('.template-card');
-  //console.log(card.generate);
+  const card = new Card({name, link}, '.template-card');
   return card.generate(name, link);
 }
 
