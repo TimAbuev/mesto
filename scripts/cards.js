@@ -3,7 +3,7 @@ class Card {
     this._text = data.name;
     this._image = data.link;
     this._template = template;
-
+    //this._removeElement = this._removeElement.bind(this);
   }
   _getElement() {
     const newTemplate = document.querySelector(this._template).content.cloneNode(true);
@@ -19,7 +19,7 @@ class Card {
     return this._element;
   }
   _setEventListeners() {
-    this._element.querySelector(selectors.trashButton).addEventListener('click', () => { this._element.remove(); })
+    this._element.querySelector(selectors.trashButton).addEventListener('click', this._removeElement);
     this._element.querySelector(selectors.wrapperButton).addEventListener('click', () => {
       openPopup(popupImage);
       popopImageImage.setAttribute('src', this._image);
@@ -30,15 +30,27 @@ class Card {
       this._handleClickLike();
     });
   }
-  _handleClickLike() {
+  _handleClickLike () {
     this._element.querySelector(selectors.like).classList.toggle(selectors.likeActive);
   }
+  _removeElement = () => {
+    console.log(this._element);
+    this._element.remove();
+  } 
 }
 
 function addCard(name, link) {
-  const newCard = generate(name, link);
+  const newCard = createCard(name, link);
   cardsContainer.prepend(newCard);
 }
+
+function createCard(name, link) {
+  const card = new Card('.template-card');
+  //console.log(card.generate);
+  return card.generate(name, link);
+}
+
+
 
 initialCards.forEach((item) => {
   const card = new Card(item, '.template-card');
