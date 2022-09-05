@@ -6,7 +6,8 @@ class Card {
     //this._removeElement = this._removeElement.bind(this);
   }
   _getElement() {
-    const newTemplate = document.querySelector(this._template).content.cloneNode(true);
+    const newTemplate = document.querySelector(this._template).content.querySelector(selectors.divElementsCard)
+    .cloneNode(true);
     return newTemplate;
   }
   generate(name, link) {
