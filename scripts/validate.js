@@ -1,8 +1,12 @@
-class FormValidator {
-    constructor(selectors, form) {
-
-    }
-}
+// class FormValidator {
+//     constructor(selectors, form) {
+//         forms: '.popup__form',
+//         button: '.popup__save',
+//         inputError: 'popup__input_type_error',
+//         invalidButtonClass: 'popup__save_invalid',
+//         spanError: '.error',
+//     }
+// }
 
 function enableValidation(selectors) {
     const collectionForm = document.querySelectorAll(selectors.forms);

@@ -3,6 +3,7 @@ class Card {
     this._text = data.name;
     this._image = data.link;
     this._template = template;
+  
   }
   _getElement() {
     const newTemplate = document.querySelector(this._template).content.
@@ -10,11 +11,11 @@ class Card {
     .cloneNode(true);
     return newTemplate;
   }
-  generate(name, link) {
+  generate() {
     this._element = this._getElement();
     this._setEventListeners();
-    this._element.querySelector(selectors.elementsImage).setAttribute('src', link);
-    this._element.querySelector(selectors.elementsImage).setAttribute('alt', name);
+    this._element.querySelector(selectors.elementsImage).setAttribute('src', this._image);
+    this._element.querySelector(selectors.elementsImage).setAttribute('alt', this._text);
     const elementsTitle = this._element.querySelector(selectors.elementsTitle);
     elementsTitle.textContent = this._text;
     return this._element;
@@ -46,7 +47,7 @@ function addCard(name, link) {
 
 function createCard(name, link) {
   const card = new Card({name, link}, '.template-card');
-  return card.generate(name, link);
+  return card.generate();
 }
 
 
