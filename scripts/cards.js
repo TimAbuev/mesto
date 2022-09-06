@@ -50,8 +50,6 @@ function createCard(name, link) {
   return card.generate();
 }
 
-
-
 initialCards.forEach((item) => {
   const card = new Card(item, '.template-card');
   const cardElement = card.generate(item.name, item.link);
