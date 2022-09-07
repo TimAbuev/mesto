@@ -98,7 +98,7 @@ function openPopup(popup) {
 function addEventListeners() {
 
   buttonPlus.addEventListener('click', function() {
-    disabledSubmitButton(buttonSubmit, selectors);
+    disabledSubmitButton();
     openPopup(popupMesto);
   })
   buttonEdit.addEventListener('click', function() {
