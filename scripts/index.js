@@ -4,7 +4,7 @@ import { formSettings, selectors, initialCards } from "./constants.js";
 
 //console.log(selectors);
 
-const divElementsCard = document.querySelector(selectors.divElementsCard);
+//const divElementsCard = document.querySelector(selectors.divElementsCard);
 const popupProfileInputJob = document.querySelector(selectors.popupProfileInputJob);
 const popupProfileInputName = document.querySelector(selectors.popupProfileInputName);
 const profileJob = document.querySelector(selectors.profileJob);
@@ -86,7 +86,10 @@ function addEventListeners() {
     const popup = button.closest('.popup');
     button.addEventListener('click', () => closePopup(popup));
   });
-
+  buttonPlus.addEventListener('click', () => {
+    //disabledSubmitButton();
+    openPopup(popupMesto);
+})
 
 } //End of addEventListeners()
 addEventListeners();
@@ -98,7 +101,7 @@ initialCards.forEach((item) => {
   cardsContainer.append(cardElement);
 })
 
-const validatingFormPopupMesto = new FormValidator(formSettings, formFromPopupMesto, selectors);
+const validatingFormPopupMesto = new FormValidator(formSettings, formFromPopupMesto);
 validatingFormPopupMesto.enableValidation();
 const validatingFormPopupProfile = new FormValidator(formSettings, formFromPopupProfile);
 validatingFormPopupProfile.enableValidation();

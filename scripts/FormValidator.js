@@ -1,3 +1,4 @@
+//import {formSettings} from "./constants.js"
 export default class FormValidator {
     constructor(settings, form) {
         this._settings = settings;
@@ -6,7 +7,6 @@ export default class FormValidator {
         this._inputError = settings.inputError;
     }
     enableValidation() {
-        this._setEventListeners();
         this._form.addEventListener('input', (event) => {
             this._handleFormInput(event);
         })
@@ -15,7 +15,6 @@ export default class FormValidator {
         const input = event.target;
         const form = event.currentTarget;
         const button = form.querySelector(this._settings.button);
-        //console.log(button);
         // 1. Установить кастомные тексты ошибок
         //_setCustomError(input);
         // 2. Показать ошибки в контейнере под полем
@@ -36,10 +35,10 @@ export default class FormValidator {
             this._enableSubmitButton(button);
         }
         else {
-            this._disabledSubmitButton(button);
+            this.disabledSubmitButton(button);
         }
     }
-    _disabledSubmitButton(button) {
+    disabledSubmitButton(button) {
         console.log(button);
         button.setAttribute('disabled', true);
         button.classList.add(this._invalidButtonClass);
@@ -58,12 +57,6 @@ export default class FormValidator {
             input.classList.remove(this._inputError);
         }
 
-    }
-    _setEventListeners() {
-        buttonPlus.addEventListener('click', () => {
-            //this._disabledSubmitButton();
-            openPopup(popupMesto);
-        })
     }
 
     // _setCustomError(input) {
