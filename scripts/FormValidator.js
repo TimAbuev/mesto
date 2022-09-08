@@ -1,21 +1,21 @@
-class FormValidator {
+export default class FormValidator {
     constructor(settings, form) {
         this._settings = settings;
         this._form = form;
         this._invalidButtonClass = settings.invalidButtonClass;
         this._inputError = settings.inputError;
-        this._button = settings.button;
     }
     enableValidation() {
+        this._setEventListeners();
         this._form.addEventListener('input', (event) => {
             this._handleFormInput(event);
         })
     }
     _handleFormInput(event) {
         const input = event.target;
-        console.log('test');
         const form = event.currentTarget;
         const button = form.querySelector(this._settings.button);
+        //console.log(button);
         // 1. Установить кастомные тексты ошибок
         //_setCustomError(input);
         // 2. Показать ошибки в контейнере под полем
@@ -39,13 +39,14 @@ class FormValidator {
             this._disabledSubmitButton(button);
         }
     }
-    disabledSubmitButton(button) {
+    _disabledSubmitButton(button) {
+        console.log(button);
         button.setAttribute('disabled', true);
         button.classList.add(this._invalidButtonClass);
     }
-    _enableSubmitButton() {
-        this._button.removeAttribute('disabled');
-        this._button.classList.remove(this._invalidButtonClass);
+    _enableSubmitButton(button) {
+        button.removeAttribute('disabled');
+        button.classList.remove(this._invalidButtonClass);
     }
     _setInputState(input) {
         const isValid = input.checkValidity();
@@ -58,6 +59,13 @@ class FormValidator {
         }
 
     }
+    _setEventListeners() {
+        buttonPlus.addEventListener('click', () => {
+            //this._disabledSubmitButton();
+            openPopup(popupMesto);
+        })
+    }
+
     // _setCustomError(input) {
     //     const validity = input.validity;
 
@@ -73,13 +81,5 @@ class FormValidator {
 
 } //end of class FormValidator
 
-const formSettings = {
-    forms: '.popup__form',
-    button: '.popup__save',
-    inputError: 'popup__input_type_error',
-    invalidButtonClass: 'popup__save_invalid',
-    spanError: '.error',
-};
-const validatingFormPopupMesto = new FormValidator(formSettings, formFromPopupMesto);
-validatingFormPopupMesto.enableValidation();
+
 
