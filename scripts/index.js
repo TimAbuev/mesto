@@ -11,7 +11,7 @@ const profileJob = document.querySelector(selectors.profileJob);
 const profileName = document.querySelector(selectors.profileName);
 const popup = document.querySelector(selectors.popup);
 const popupProfile = document.querySelector(selectors.popupProfile);
-const popupImage = document.querySelector(selectors.popupImage);
+export const popupImage = document.querySelector(selectors.popupImage);
 //const forms = document.querySelectorAll(selectors.forms);
 const formFromPopupMesto = document.querySelector(selectors.formFromPopupMesto); 
 const buttonSubmit = formFromPopupMesto.querySelector(selectors.buttonSubmit);
@@ -95,7 +95,7 @@ function addEventListeners() {
 addEventListeners();
 
 initialCards.forEach((item) => {
-  const card = new Card(item, '.template-card');
+  const card = new Card(item, '.template-card', selectors);
   const cardElement = card.generate(item.name, item.link);
   //console.log(cardElement);
   cardsContainer.append(cardElement);
