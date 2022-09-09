@@ -39,7 +39,6 @@ export default class FormValidator {
         }
     }
     disabledSubmitButton(button) {
-        console.log(button);
         button.setAttribute('disabled', true);
         button.classList.add(this._invalidButtonClass);
     }

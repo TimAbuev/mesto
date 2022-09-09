@@ -1,10 +1,13 @@
-import {popupImage} from "./constants.js";
+import { selectors } from "./constants.js";
+import { popupImage } from "./constants.js";
+//import { openPopup } from "./index.js";
 export default class Card {
-  constructor(data, template, selectors) {
+  constructor(data, template, selectors, openPopupImage) {
     this._text = data.name;
     this._image = data.link;
     this._template = template;
     this._selectors = selectors;
+    this._openPopupImage = openPopupImage;
   }
   _getElement() {
     const newTemplate = document.querySelector(this._template).content.
@@ -23,16 +26,16 @@ export default class Card {
   }
   _setEventListeners() {
     this._element.querySelector(this._selectors.trashButton).addEventListener('click', this._removeElement);
+
     this._element.querySelector(this._selectors.wrapperButton).addEventListener('click', () => {
-      openPopup(popupImage);
-      popopImageImage.setAttribute('src', this._image);
-      popopImageImage.setAttribute('alt', this._text);
-      caption.textContent = this._text;
+      console.log("сработал клик по картинке");
+      this._openPopupImage(this._text, this._image, this._text);
+      
     });
     this._element.querySelector(this._selectors.like).addEventListener('click', () => {
       this._handleClickLike();
     });
-  }
+  }//END OF _setEventListeners
   _handleClickLike () {
     this._element.querySelector(this._selectors.like).classList.toggle(this._selectors.likeActive);
   }

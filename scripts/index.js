@@ -2,38 +2,31 @@ import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 import { formSettings, selectors, initialCards } from "./constants.js";
 
-//console.log(selectors);
-
-//const divElementsCard = document.querySelector(selectors.divElementsCard);
+//const popup = document.querySelector(selectors.popup);
+const buttonPlus = document.querySelector(selectors.buttonPlus);
+const cardsContainer = document.querySelector(selectors.cardsContainer);
 const popupProfileInputJob = document.querySelector(selectors.popupProfileInputJob);
 const popupProfileInputName = document.querySelector(selectors.popupProfileInputName);
 const profileJob = document.querySelector(selectors.profileJob);
 const profileName = document.querySelector(selectors.profileName);
-const popup = document.querySelector(selectors.popup);
 const popupProfile = document.querySelector(selectors.popupProfile);
-export const popupImage = document.querySelector(selectors.popupImage);
-//const forms = document.querySelectorAll(selectors.forms);
-const formFromPopupMesto = document.querySelector(selectors.formFromPopupMesto); 
-const buttonSubmit = formFromPopupMesto.querySelector(selectors.buttonSubmit);
+import { popupImage } from "./constants.js";
+import { popopImageImage } from "./constants.js";
+import { caption } from "./constants.js";
+const formFromPopupMesto = document.querySelector(selectors.formFromPopupMesto);
 const formFromPopupProfile = document.querySelector(selectors.formFromPopupProfile);
 const inputName = document.querySelector(selectors.inputName);
 const inputLink = document.querySelector(selectors.inputLink);
-const cardsContainer = document.querySelector(selectors.cardsContainer);
-const buttonPlus = document.querySelector(selectors.buttonPlus);
 const popupMesto = document.querySelector(selectors.popupMesto);
 const closeButtons = document.querySelectorAll(selectors.closeButtons);
-const popopImageImage = popupImage.querySelector(selectors.popopImageImage);
-const caption = popupImage.querySelector(selectors.caption);
 const buttonEdit = document.querySelector(selectors.buttonEdit);
-const template = document.querySelector(selectors.template).content.querySelector(selectors.divElementsCard);
 
-//console.log(selectors.divElementsCard);
 function addCard(name, link) {
   const newCard = createCard(name, link);
   cardsContainer.prepend(newCard);
 }
 function createCard(name, link) {
-  const card = new Card({name, link}, '.template-card');
+  const card = new Card({name, link}, '.template-card', selectors, openPopupImage);
   return card.generate();
 }
 function handleEscUp(evt) {
@@ -49,7 +42,16 @@ function closePopup(popup) {
 }
 function openPopup(popup) {
   popup.classList.add(selectors.openedPopup);
-  document.addEventListener('keyup', handleEscUp);
+  //document.addEventListener('keyup', handleEscUp);
+}
+
+function openPopupImage(name, link, textCaption) {
+  console.log(popopImageImage);
+  console.log(selectors.popopImageImage);
+  openPopup(popupImage);
+  popopImageImage.setAttribute('src', link);
+  popopImageImage.setAttribute('alt', name);
+  caption.textContent = textCaption;
 }
 
 function closePopupByOverlay(popup) {
@@ -95,9 +97,8 @@ function addEventListeners() {
 addEventListeners();
 
 initialCards.forEach((item) => {
-  const card = new Card(item, '.template-card', selectors);
+  const card = new Card(item, '.template-card', selectors, openPopupImage);
   const cardElement = card.generate(item.name, item.link);
-  //console.log(cardElement);
   cardsContainer.append(cardElement);
 })
 

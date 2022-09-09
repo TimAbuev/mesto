@@ -13,7 +13,7 @@ export const selectors = {
   popupImage: '.popup-image',
   closeButtons: '.popup__close-icon',
   buttonEdit: '.profile__button-edit',
-    //forms: '.popup__form',
+  //forms: '.popup__form',
   formFromPopupProfile: '.popup__form_type_form-profile',
   inputName: '.popup__input_type_card-name',
   inputLink: '.popup__input_type_card-src',
@@ -66,3 +66,7 @@ export const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
+
+export const popupImage = document.querySelector(selectors.popupImage);
+export const popopImageImage = document.querySelector(selectors.popopImageImage);
+export const caption = document.querySelector(selectors.caption);
