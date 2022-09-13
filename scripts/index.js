@@ -1,8 +1,10 @@
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
-import { formSettings, selectors, initialCards } from "./constants.js";
+import { formSettings, selectors, initialCards } from "../utils/constants.js";
 
-//const popup = document.querySelector(selectors.popup);
+const popupImage = document.querySelector(selectors.popupImage);
+const popopImageImage = document.querySelector(selectors.popopImageImage);
+const caption = document.querySelector(selectors.caption);
 const buttonPlus = document.querySelector(selectors.buttonPlus);
 const cardsContainer = document.querySelector(selectors.cardsContainer);
 const popupProfileInputJob = document.querySelector(selectors.popupProfileInputJob);
@@ -10,16 +12,26 @@ const popupProfileInputName = document.querySelector(selectors.popupProfileInput
 const profileJob = document.querySelector(selectors.profileJob);
 const profileName = document.querySelector(selectors.profileName);
 const popupProfile = document.querySelector(selectors.popupProfile);
-import { popupImage } from "./constants.js";
-import { popopImageImage } from "./constants.js";
-import { caption } from "./constants.js";
 const formFromPopupMesto = document.querySelector(selectors.formFromPopupMesto);
 const formFromPopupProfile = document.querySelector(selectors.formFromPopupProfile);
+const buttonSubmit = formFromPopupMesto.querySelector(selectors.buttonSubmit);
 const inputName = document.querySelector(selectors.inputName);
 const inputLink = document.querySelector(selectors.inputLink);
 const popupMesto = document.querySelector(selectors.popupMesto);
 const closeButtons = document.querySelectorAll(selectors.closeButtons);
 const buttonEdit = document.querySelector(selectors.buttonEdit);
+
+const validatingFormPopupMesto = new FormValidator(formSettings, formFromPopupMesto);
+validatingFormPopupMesto.enableValidation();
+
+const validatingFormPopupProfile = new FormValidator(formSettings, formFromPopupProfile);
+validatingFormPopupProfile.enableValidation();
+
+initialCards.forEach((item) => {
+  const card = new Card(item, '.template-card', selectors, openPopupImage);
+  const cardElement = card.generate(item.name, item.link);
+  cardsContainer.append(cardElement);
+})
 
 function addCard(name, link) {
   const newCard = createCard(name, link);
@@ -42,18 +54,14 @@ function closePopup(popup) {
 }
 function openPopup(popup) {
   popup.classList.add(selectors.openedPopup);
-  //document.addEventListener('keyup', handleEscUp);
+  document.addEventListener('keyup', handleEscUp);
 }
-
 function openPopupImage(name, link, textCaption) {
-  console.log(popopImageImage);
-  console.log(selectors.popopImageImage);
   openPopup(popupImage);
   popopImageImage.setAttribute('src', link);
   popopImageImage.setAttribute('alt', name);
   caption.textContent = textCaption;
 }
-
 function closePopupByOverlay(popup) {
   popup.addEventListener('mousedown', function(evt) {
     if(evt.target.classList.contains(selectors.openedPopup)) {
@@ -68,6 +76,7 @@ closePopupByOverlay(popupImage);
 function addEventListeners() {
 
   buttonEdit.addEventListener('click', function() {
+    validatingFormPopupProfile.clearError();
     openPopup(popupProfile);
     popupProfileInputName.value = profileName.textContent;
     popupProfileInputJob.value = profileJob.textContent;
@@ -89,21 +98,15 @@ function addEventListeners() {
     button.addEventListener('click', () => closePopup(popup));
   });
   buttonPlus.addEventListener('click', () => {
-    //disabledSubmitButton();
+    validatingFormPopupMesto.clearError();
+    validatingFormPopupMesto.disabledSubmitButton(buttonSubmit);
     openPopup(popupMesto);
-})
+  });
 
 } //End of addEventListeners()
 addEventListeners();
 
-initialCards.forEach((item) => {
-  const card = new Card(item, '.template-card', selectors, openPopupImage);
-  const cardElement = card.generate(item.name, item.link);
-  cardsContainer.append(cardElement);
-})
 
-const validatingFormPopupMesto = new FormValidator(formSettings, formFromPopupMesto);
-validatingFormPopupMesto.enableValidation();
-const validatingFormPopupProfile = new FormValidator(formSettings, formFromPopupProfile);
-validatingFormPopupProfile.enableValidation();
+
+
 

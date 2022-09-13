@@ -1,4 +1,3 @@
-//import {formSettings} from "./constants.js"
 export default class FormValidator {
     constructor(settings, form) {
         this._settings = settings;
@@ -7,35 +6,42 @@ export default class FormValidator {
         this._inputError = settings.inputError;
     }
     enableValidation() {
-        this._form.addEventListener('input', (event) => {
-            this._handleFormInput(event);
-        })
+        this._form.addEventListener('submit', (evt) => evt.preventDefault());
+        this._setEventListeners();
     }
-    _handleFormInput(event) {
-        const input = event.target;
-        const form = event.currentTarget;
-        const button = form.querySelector(this._settings.button);
+    _setEventListeners() {
+        this._buttonElement = this._form.querySelector(this._settings.button);
+        this._inputList = this._form.querySelectorAll(this._settings.input);
+        this._inputList.forEach((inputElement) => {
+            inputElement.addEventListener('input', () => {
+                this._inputElement = inputElement;
+                this._handleFormInput();                
+            });
+        });
+
+    }
+    _handleFormInput() {
         // 1. Установить кастомные тексты ошибок
         //_setCustomError(input);
         // 2. Показать ошибки в контейнере под полем
-        this._showFieldError(input, form);
+        this._showFieldError();
         // 3. Включить ил отключить кнопку отправки формы
-        this._setSubmitButtonState(form, button);
+        this._setSubmitButtonState();
         // 4. Подсветить или отсветить инпут
-        this._setInputState(input);
+        this._setInputState();
     }
-    _showFieldError(input, form) {
-        const span = form.querySelector(`.${input.id}-error`);
-        span.textContent = input.validationMessage;
+    _showFieldError() {
+        const span = this._form.querySelector(`.${this._inputElement.id}-error`);
+        span.textContent = this._inputElement.validationMessage;
     }
-    _setSubmitButtonState(form, button) {
-        const isValid = form.checkValidity();
+    _setSubmitButtonState() {
+        const isValid = this._form.checkValidity();
 
         if (isValid) {
-            this._enableSubmitButton(button);
+            this._enableSubmitButton(this._buttonElement);
         }
         else {
-            this.disabledSubmitButton(button);
+            this.disabledSubmitButton(this._buttonElement);
         }
     }
     disabledSubmitButton(button) {
@@ -46,16 +52,21 @@ export default class FormValidator {
         button.removeAttribute('disabled');
         button.classList.remove(this._invalidButtonClass);
     }
-    _setInputState(input) {
-        const isValid = input.checkValidity();
+    _setInputState() {
+        const isValid = this._inputElement.checkValidity();
         // если строчка невалидная
         if (!isValid) {
-            input.classList.add(this._inputError);
+            this._inputElement.classList.add(this._inputError);
         }
         else {
-            input.classList.remove(this._inputError);
+            this._inputElement.classList.remove(this._inputError);
         }
 
+    }
+    clearError() {
+        this._form.reset();
+        this._form.querySelectorAll(this._settings.input).forEach((item) => {item.classList.remove(this._inputError)});
+        this._form.querySelectorAll(this._settings.spanError).forEach((item) => {item.textContent = '';});
     }
 
     // _setCustomError(input) {

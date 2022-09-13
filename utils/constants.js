@@ -4,6 +4,7 @@ export const formSettings = {
   inputError: 'popup__input_type_error',
   invalidButtonClass: 'popup__save_invalid',
   spanError: '.error',
+  input: '.popup__input',
 };
 
 export const selectors = {
@@ -66,7 +67,3 @@ export const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-
-export const popupImage = document.querySelector(selectors.popupImage);
-export const popopImageImage = document.querySelector(selectors.popopImageImage);
-export const caption = document.querySelector(selectors.caption);
