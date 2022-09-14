@@ -62,6 +62,11 @@ function openPopupImage(name, link, textCaption) {
   popopImageImage.setAttribute('alt', name);
   caption.textContent = textCaption;
 }
+function clearError(form) {
+  form.reset();
+  form.querySelectorAll(formSettings.input).forEach((item) => {item.classList.remove(formSettings.inputError)});
+  form.querySelectorAll(formSettings.spanError).forEach((item) => {item.textContent = '';});
+}
 function closePopupByOverlay(popup) {
   popup.addEventListener('mousedown', function(evt) {
     if(evt.target.classList.contains(selectors.openedPopup)) {
@@ -74,9 +79,8 @@ closePopupByOverlay(popupMesto);
 closePopupByOverlay(popupImage);
 
 function addEventListeners() {
-
   buttonEdit.addEventListener('click', function() {
-    validatingFormPopupProfile.clearError();
+    clearError(formFromPopupProfile);
     openPopup(popupProfile);
     popupProfileInputName.value = profileName.textContent;
     popupProfileInputJob.value = profileJob.textContent;
@@ -98,7 +102,7 @@ function addEventListeners() {
     button.addEventListener('click', () => closePopup(popup));
   });
   buttonPlus.addEventListener('click', () => {
-    validatingFormPopupMesto.clearError();
+    clearError(formFromPopupMesto);
     validatingFormPopupMesto.disabledSubmitButton(buttonSubmit);
     openPopup(popupMesto);
   });
