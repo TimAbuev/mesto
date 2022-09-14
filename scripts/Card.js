@@ -22,17 +22,18 @@ export default class Card {
     return this._element;
   }
   _setEventListeners() {
+    this._like = this._element.querySelector(this._selectors.like);
     this._element.querySelector(this._selectors.trashButton).addEventListener('click', this._removeElement);
     this._element.querySelector(this._selectors.wrapperButton).addEventListener('click', () => {
       this._openPopupImage(this._text, this._image, this._text);    
     });
-    this._element.querySelector(this._selectors.like).addEventListener('click', () => {
+    this._like.addEventListener('click', () => {
       this._handleClickLike();
     });
   }//END OF _setEventListeners
   
   _handleClickLike () {
-    this._element.querySelector(this._selectors.like).classList.toggle(this._selectors.likeActive);
+    this._like.classList.toggle(this._selectors.likeActive);
   }
   _removeElement = () => {
     this._element.remove();
