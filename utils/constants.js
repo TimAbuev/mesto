@@ -8,13 +8,12 @@ export const formSettings = {
 };
 
 export const selectors = {
-  popup: '.popup',
+  popups: '.popup',
   popupProfile: '.popup-profile',
   popupMesto: '.popup-mesto',
   popupImage: '.popup-image',
-  closeButtons: '.popup__close-icon',
+  buttonsClose: 'popup__close-icon',
   buttonEdit: '.profile__button-edit',
-  //forms: '.popup__form',
   formFromPopupProfile: '.popup__form_type_form-profile',
   inputName: '.popup__input_type_card-name',
   inputLink: '.popup__input_type_card-src',

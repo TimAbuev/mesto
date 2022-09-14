@@ -2,6 +2,7 @@ import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 import { formSettings, selectors, initialCards } from "../utils/constants.js";
 
+const popups = document.querySelectorAll(selectors.popups);
 const popupImage = document.querySelector(selectors.popupImage);
 const popopImageImage = document.querySelector(selectors.popopImageImage);
 const caption = document.querySelector(selectors.caption);
@@ -18,12 +19,9 @@ const buttonSubmit = formFromPopupMesto.querySelector(selectors.buttonSubmit);
 const inputName = document.querySelector(selectors.inputName);
 const inputLink = document.querySelector(selectors.inputLink);
 const popupMesto = document.querySelector(selectors.popupMesto);
-const closeButtons = document.querySelectorAll(selectors.closeButtons);
 const buttonEdit = document.querySelector(selectors.buttonEdit);
-
 const validatingFormPopupMesto = new FormValidator(formSettings, formFromPopupMesto);
 validatingFormPopupMesto.enableValidation();
-
 const validatingFormPopupProfile = new FormValidator(formSettings, formFromPopupProfile);
 validatingFormPopupProfile.enableValidation();
 
@@ -36,7 +34,7 @@ function addCard(name, link) {
   cardsContainer.prepend(newCard);
 }
 function createCard(name, link) {
-  const card = new Card({name, link}, '.template-card', selectors, openPopupImage);
+  const card = new Card({ name, link }, '.template-card', selectors, openPopupImage);
   return card.generate();
 }
 function handleEscUp(evt) {
@@ -62,42 +60,39 @@ function openPopupImage(name, link, textCaption) {
 }
 function clearError(form) {
   form.reset();
-  form.querySelectorAll(formSettings.input).forEach((item) => {item.classList.remove(formSettings.inputError)});
-  form.querySelectorAll(formSettings.spanError).forEach((item) => {item.textContent = '';});
+  form.querySelectorAll(formSettings.input).forEach((item) => { item.classList.remove(formSettings.inputError) });
+  form.querySelectorAll(formSettings.spanError).forEach((item) => { item.textContent = ''; });
 }
-function closePopupByOverlay(popup) {
-  popup.addEventListener('mousedown', function(evt) {
-    if(evt.target.classList.contains(selectors.openedPopup)) {
-      closePopup(evt.target);
-    } 
-  })
-}
-closePopupByOverlay(popupProfile);
-closePopupByOverlay(popupMesto);
-closePopupByOverlay(popupImage);
-
 function addEventListeners() {
-  buttonEdit.addEventListener('click', function() {
+  
+  popups.forEach((popup) => {
+    popup.addEventListener('mousedown', (evt) => {
+      if (evt.target.classList.contains(selectors.openedPopup)) {
+        closePopup(popup)
+      }
+      if (evt.target.classList.contains(selectors.buttonsClose)) {
+        closePopup(popup)
+      } 
+    })
+  });
+
+  buttonEdit.addEventListener('click', function () {
     clearError(formFromPopupProfile);
     openPopup(popupProfile);
     popupProfileInputName.value = profileName.textContent;
     popupProfileInputJob.value = profileJob.textContent;
   });
-  formFromPopupProfile.addEventListener('submit', function(event) { 
-    event.preventDefault();     
+  formFromPopupProfile.addEventListener('submit', function (event) {
+    event.preventDefault();
     profileName.textContent = popupProfileInputName.value;
     profileJob.textContent = popupProfileInputJob.value;
     closePopup(popupProfile);
   });
-  formFromPopupMesto.addEventListener('submit', function(event) {
+  formFromPopupMesto.addEventListener('submit', function (event) {
     event.preventDefault();
     addCard(inputName.value, inputLink.value);
     formFromPopupMesto.reset();
     closePopup(popupMesto);
-  }); 
-  closeButtons.forEach((button) => {
-    const popup = button.closest('.popup');
-    button.addEventListener('click', () => closePopup(popup));
   });
   buttonPlus.addEventListener('click', () => {
     clearError(formFromPopupMesto);
