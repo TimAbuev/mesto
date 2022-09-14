@@ -28,11 +28,10 @@ const validatingFormPopupProfile = new FormValidator(formSettings, formFromPopup
 validatingFormPopupProfile.enableValidation();
 
 initialCards.forEach((item) => {
-  const card = new Card(item, '.template-card', selectors, openPopupImage);
-  const cardElement = card.generate(item.name, item.link);
-  cardsContainer.append(cardElement);
-})
+  const card = createCard(item.name, item.link);
+  cardsContainer.append(card);
 
+})
 function addCard(name, link) {
   const newCard = createCard(name, link);
   cardsContainer.prepend(newCard);
