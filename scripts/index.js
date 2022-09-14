@@ -30,7 +30,6 @@ validatingFormPopupProfile.enableValidation();
 initialCards.forEach((item) => {
   const card = createCard(item.name, item.link);
   cardsContainer.append(card);
-
 })
 function addCard(name, link) {
   const newCard = createCard(name, link);

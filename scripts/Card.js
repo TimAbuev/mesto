@@ -14,9 +14,10 @@ export default class Card {
   }
   generate() {
     this._element = this._getElement();
+    this._elementsImage = this._element.querySelector(this._selectors.elementsImage);
     this._setEventListeners();
-    this._element.querySelector(this._selectors.elementsImage).setAttribute('src', this._image);
-    this._element.querySelector(this._selectors.elementsImage).setAttribute('alt', this._text);
+    this._elementsImage.setAttribute('src', this._image);
+    this._elementsImage.setAttribute('alt', this._text);
     const elementsTitle = this._element.querySelector(this._selectors.elementsTitle);
     elementsTitle.textContent = this._text;
     return this._element;
