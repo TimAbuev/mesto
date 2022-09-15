@@ -63,11 +63,10 @@ export default class FormValidator {
         }
 
     }
-    // clearError() {
-    //     this._form.reset();
-    //     this._form.querySelectorAll(this._settings.input).forEach((item) => {item.classList.remove(this._inputError)});
-    //     this._form.querySelectorAll(this._settings.spanError).forEach((item) => {item.textContent = '';});
-    // }
+    clearError() {
+        this._form.querySelectorAll(this._settings.input).forEach((item) => {item.classList.remove(this._inputError)});
+        this._form.querySelectorAll(this._settings.spanError).forEach((item) => {item.textContent = '';});
+    }
 
     // _setCustomError(input) {
     //     const validity = input.validity;
