@@ -82,6 +82,3 @@ export default class FormValidator {
     // }
 
 } //end of class FormValidator
-
-
-

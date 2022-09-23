@@ -1,6 +1,7 @@
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
 import { formSettings, selectors, initialCards } from "../utils/constants.js";
+import Section from "./Section.js";
 
 const popups = document.querySelectorAll(selectors.popups);
 const popupImage = document.querySelector(selectors.popupImage);
@@ -25,18 +26,21 @@ validatingFormPopupMesto.enableValidation();
 const validatingFormPopupProfile = new FormValidator(formSettings, formFromPopupProfile);
 validatingFormPopupProfile.enableValidation();
 
-initialCards.forEach((item) => {
-  const card = createCard(item.name, item.link);
-  cardsContainer.append(card);
-})
-function addCard(name, link) {
-  const newCard = createCard(name, link);
-  cardsContainer.prepend(newCard);
+const section = new Section({
+  items: initialCards, 
+  renderer: (data) => {
+    const card = new Card( data , '.template-card', selectors, openPopupImage);
+    section.addItem(card.generate());
+  }
+}, cardsContainer);
+
+section.renderItems();
+
+function addCard() {
+  const card = new Card({ name:inputName.value, link:inputLink.value }, '.template-card', selectors, openPopupImage);
+  section.addItem(card.generate());
 }
-function createCard(name, link) {
-  const card = new Card({ name, link }, '.template-card', selectors, openPopupImage);
-  return card.generate();
-}
+
 function handleEscUp(evt) {
   evt.preventDefault();
   if (evt.key === 'Escape') {
@@ -59,7 +63,7 @@ function openPopupImage(name, link, textCaption) {
   caption.textContent = textCaption;
 }
 function addEventListeners() {
-  
+
   popups.forEach((popup) => {
     popup.addEventListener('mousedown', (evt) => {
       if (evt.target.classList.contains(selectors.openedPopup)) {
@@ -67,7 +71,7 @@ function addEventListeners() {
       }
       if (evt.target.classList.contains(selectors.buttonsClose)) {
         closePopup(popup)
-      } 
+      }
     })
   });
 
@@ -85,7 +89,7 @@ function addEventListeners() {
   });
   formFromPopupMesto.addEventListener('submit', function (event) {
     event.preventDefault();
-    addCard(inputName.value, inputLink.value);
+    addCard();
     formFromPopupMesto.reset();
     closePopup(popupMesto);
   });
