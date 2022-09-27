@@ -26,19 +26,22 @@ validatingFormPopupMesto.enableValidation();
 const validatingFormPopupProfile = new FormValidator(formSettings, formFromPopupProfile);
 validatingFormPopupProfile.enableValidation();
 
+function createCard(data) {
+  const card = new Card( data , '.template-card', selectors, openPopupImage);
+  return card.generate();
+}
+
 const section = new Section({
   items: initialCards, 
   renderer: (data) => {
-    const card = new Card( data , '.template-card', selectors, openPopupImage);
-    section.addItem(card.generate());
+    section.addItem(createCard(data));
   }
 }, cardsContainer);
 
 section.renderItems();
 
-function addCard() {
-  const card = new Card({ name:inputName.value, link:inputLink.value }, '.template-card', selectors, openPopupImage);
-  section.addItem(card.generate());
+function addCard({name, link}) {
+  section.addItem(createCard({name, link}));
 }
 
 function handleEscUp(evt) {
@@ -89,7 +92,7 @@ function addEventListeners() {
   });
   formFromPopupMesto.addEventListener('submit', function (event) {
     event.preventDefault();
-    addCard();
+    addCard({name:inputName.value, link:inputLink.value});
     formFromPopupMesto.reset();
     closePopup(popupMesto);
   });
