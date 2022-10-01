@@ -1,10 +1,10 @@
 export default class Card {
-  constructor(data, template, selectors, openPopupImage) {
+  constructor({handleCardClick}, data, template, selectors) {
     this._text = data.name;
     this._image = data.link;
     this._template = template;
     this._selectors = selectors;
-    this._openPopupImage = openPopupImage;
+    this._openPopupImage = handleCardClick;
   }
   _getElement() {
     const newTemplate = document.querySelector(this._template).content.
@@ -26,7 +26,7 @@ export default class Card {
     this._like = this._element.querySelector(this._selectors.like);
     this._element.querySelector(this._selectors.trashButton).addEventListener('click', this._removeElement);
     this._element.querySelector(this._selectors.wrapperButton).addEventListener('click', () => {
-      this._openPopupImage(this._text, this._image, this._text);    
+      this._openPopupImage(this._text, this._image);    
     });
     this._like.addEventListener('click', () => {
       this._handleClickLike();

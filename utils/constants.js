@@ -40,6 +40,8 @@ export const selectors = {
   invalidButtonClass: 'popup__save_invalid',
 }
 
+export const popups = document.querySelectorAll(selectors.popups);
+
 export const initialCards = [
   {
     name: 'Архыз',
