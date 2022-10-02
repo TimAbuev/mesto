@@ -4,6 +4,7 @@ import { formSettings, selectors, initialCards } from "../utils/constants.js";
 import Section from "./Section.js";
 import Popup from "./Popup.js";
 import PopupWithImage from "./PopupWithImage.js";
+import { popups } from "../utils/constants.js";
 
 const popupImage = document.querySelector(selectors.popupImage);
 const popopImageImage = document.querySelector(selectors.popopImageImage);
@@ -27,8 +28,8 @@ validatingFormPopupMesto.enableValidation();
 const validatingFormPopupProfile = new FormValidator(formSettings, formFromPopupProfile);
 validatingFormPopupProfile.enableValidation();
 
-const popupWithImageInstance = new PopupWithImage(popupImage, caption);
-popupWithImageInstance.setEventListeners();
+const popupWithImageInstance = new PopupWithImage(popupImage, caption, popopImageImage);
+popupWithImageInstance.setEventListeners(popups);
 
 function createCard(data) {
   const card = new Card(

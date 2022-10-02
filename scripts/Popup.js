@@ -1,9 +1,10 @@
-import { popups } from "../utils/constants.js";
 import { selectors } from "../utils/constants.js";
 
 export default class Popup {
   constructor(popupSelector) {
     this._popupSelector = popupSelector;
+    this._handleEscClose = this._handleEscClose.bind(this);
+    //this.close = this.close.bind(this);
   }
 
   open() {
@@ -16,16 +17,14 @@ export default class Popup {
     document.removeEventListener('keyup', this._handleEscClose);
   }
 
-  _handleEscClose = (evt) => {
+  _handleEscClose(evt) {
     evt.preventDefault();
     if (evt.key === 'Escape') {
-      //const active = document.querySelector(selectors.activePopup);
       this.close();
     }
-
   }
 
-  setEventListeners() {
+  setEventListeners(popups) {
     popups.forEach((popup) => {
       popup.addEventListener('mousedown', (evt) => {
         if (evt.target.classList.contains(selectors.openedPopup)) {
