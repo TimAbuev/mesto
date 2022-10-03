@@ -5,6 +5,7 @@ import Section from "./Section.js";
 import Popup from "./Popup.js";
 import PopupWithImage from "./PopupWithImage.js";
 import { popups } from "../utils/constants.js";
+import PopupWithForm from "./PopupWithForm.js";
 
 const popupImage = document.querySelector(selectors.popupImage);
 const popopImageImage = document.querySelector(selectors.popopImageImage);
@@ -29,7 +30,18 @@ const validatingFormPopupProfile = new FormValidator(formSettings, formFromPopup
 validatingFormPopupProfile.enableValidation();
 
 const popupWithImageInstance = new PopupWithImage(popupImage, caption, popopImageImage);
-popupWithImageInstance.setEventListeners(popups);
+popupWithImageInstance.setEventListeners();
+
+const popupMestoInstance = new PopupWithForm(popupMesto);
+popupMestoInstance.setEventListeners();
+ 
+
+buttonPlus.addEventListener('click', () => {
+  formFromPopupMesto.reset();
+  validatingFormPopupMesto.clearError();
+  validatingFormPopupMesto.disabledSubmitButton(buttonSubmit);
+  popupMestoInstance.open();
+});
 
 function createCard(data) {
   const card = new Card(
@@ -74,12 +86,7 @@ function addEventListeners() {
     formFromPopupMesto.reset();
     closePopup(popupMesto);
   });
-  buttonPlus.addEventListener('click', () => {
-    formFromPopupMesto.reset();
-    validatingFormPopupMesto.clearError();
-    validatingFormPopupMesto.disabledSubmitButton(buttonSubmit);
-    openPopup(popupMesto);
-  });
+
 
 } //End of addEventListeners()
 addEventListeners();
