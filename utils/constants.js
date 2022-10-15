@@ -41,6 +41,8 @@ export const selectors = {
 }
 
 export const popups = document.querySelectorAll(selectors.popups);
+export const formFromPopupMesto = document.querySelector(selectors.formFromPopupMesto);
+
 
 export const initialCards = [
   {

@@ -20,8 +20,6 @@ const popupProfile = document.querySelector(selectors.popupProfile);
 const formFromPopupMesto = document.querySelector(selectors.formFromPopupMesto);
 const formFromPopupProfile = document.querySelector(selectors.formFromPopupProfile);
 const buttonSubmit = formFromPopupMesto.querySelector(selectors.buttonSubmit);
-const inputName = document.querySelector(selectors.inputName);
-const inputLink = document.querySelector(selectors.inputLink);
 const popupMesto = document.querySelector(selectors.popupMesto);
 const buttonEdit = document.querySelector(selectors.buttonEdit);
 const validatingFormPopupMesto = new FormValidator(formSettings, formFromPopupMesto);
@@ -32,9 +30,12 @@ validatingFormPopupProfile.enableValidation();
 const popupWithImageInstance = new PopupWithImage(popupImage, caption, popopImageImage);
 popupWithImageInstance.setEventListeners();
 
-const popupMestoInstance = new PopupWithForm(popupMesto);
+const popupMestoInstance = new PopupWithForm(popupMesto, addCard);
 popupMestoInstance.setEventListeners();
- 
+
+function addCard(formDataObject) {
+  section.addItem(createCard(formDataObject));
+}
 
 buttonPlus.addEventListener('click', () => {
   formFromPopupMesto.reset();
@@ -62,9 +63,7 @@ const section = new Section({
 }, cardsContainer);
 section.renderItems();
 
-function addCard({ name, link }) {
-  section.addItem(createCard({ name, link }));
-}
+
 
 function addEventListeners() {
 
@@ -80,18 +79,8 @@ function addEventListeners() {
     profileJob.textContent = popupProfileInputJob.value;
     closePopup(popupProfile);
   });
-  formFromPopupMesto.addEventListener('submit', function (event) {
-    event.preventDefault();
-    addCard({ name: inputName.value, link: inputLink.value });
-    formFromPopupMesto.reset();
-    closePopup(popupMesto);
-  });
+
 
 
 } //End of addEventListeners()
 addEventListeners();
-
-
-
-
-
