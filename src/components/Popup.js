@@ -31,14 +31,3 @@ export default class Popup {
   }
 
 }
-
-// popups.forEach((popup) => {
-//   popup.addEventListener('mousedown', (evt) => {
-//     if (evt.target.classList.contains(selectors.openedPopup)) {
-//       this.close(popup)
-//     }
-//     if (evt.target.classList.contains(selectors.buttonsClose)) {
-//       this.close(popup)
-//     }
-//   })
-// });

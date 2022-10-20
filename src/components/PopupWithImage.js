@@ -13,10 +13,3 @@ export default class PopupWithImage extends Popup {
     this._caption.textContent = name;
   }
 }
-
-// function openPopupImage(name, link, textCaption) {
-//   popupImage.open();
-//   popopImageImage.setAttribute('src', link);
-//   popopImageImage.setAttribute('alt', name);
-//   caption.textContent = textCaption;
-// }

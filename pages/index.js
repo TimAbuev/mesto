@@ -1,12 +1,10 @@
-import Card from "./Card.js";
-import FormValidator from "./FormValidator.js";
-import { formSettings, selectors, initialCards } from "../utils/constants.js";
-import Section from "./Section.js";
-import Popup from "./Popup.js";
-import PopupWithImage from "./PopupWithImage.js";
-import { popups } from "../utils/constants.js";
-import PopupWithForm from "./PopupWithForm.js";
-import UserInfo from "./UserInfo.js";
+import Card from "../src/components/Card.js";
+import FormValidator from "../src/components/FormValidator.js";
+import { formSettings, selectors, initialCards } from "../src/utils/constants.js";
+import Section from "../src/components/Section.js";
+import PopupWithImage from "../src/components/PopupWithImage.js";
+import PopupWithForm from "../src/components/PopupWithForm.js";
+import UserInfo from "../src/components/UserInfo.js";
 
 const popupImage = document.querySelector(selectors.popupImage);
 const popopImageImage = document.querySelector(selectors.popopImageImage);
@@ -23,8 +21,9 @@ const formFromPopupProfile = document.querySelector(selectors.formFromPopupProfi
 const buttonSubmit = formFromPopupMesto.querySelector(selectors.buttonSubmit);
 const popupMesto = document.querySelector(selectors.popupMesto);
 const buttonEdit = document.querySelector(selectors.buttonEdit);
-const validatingFormPopupMesto = new FormValidator(formSettings, formFromPopupMesto);
-validatingFormPopupMesto.enableValidation();
+
+const formFromPopupMestoInstance = new FormValidator(formSettings, formFromPopupMesto);
+formFromPopupMestoInstance.enableValidation();
 const validatingFormPopupProfile = new FormValidator(formSettings, formFromPopupProfile);
 validatingFormPopupProfile.enableValidation();
 
@@ -46,22 +45,11 @@ function addUserInfo(data) {
 buttonEdit.addEventListener('click', function () {
   validatingFormPopupProfile.clearError();
   const currentUserInfo = userInfoInstance.getUserInfo();
-  //console.log(currentUserInfo);
   popupProfileInputName.value = currentUserInfo.userName;
   popupProfileInputJob.value = currentUserInfo.userDescription;
   popupUserInfoInstance.open();
-  // popupProfileInputName.value = profileName.textContent;
-  // popupProfileInputJob.value = profileJob.textContent;
 });
 
-// formFromPopupProfile.addEventListener('submit', function (event) {
-//   event.preventDefault();
-//   // profileName.textContent = popupProfileInputName.value;
-//   // profileJob.textContent = popupProfileInputJob.value;
-//   //console.log(popupProfileInputJob.value);
-//   popupUserInfoInstance.close();
-// });
-  
 function addCard(formDataObject) {
   sectionInstance.addItem(createCard(formDataObject));
 }
@@ -89,12 +77,10 @@ function addEventListeners() {
 
   buttonPlus.addEventListener('click', () => {
     formFromPopupMesto.reset();
-    validatingFormPopupMesto.clearError();
-    validatingFormPopupMesto.disabledSubmitButton(buttonSubmit);
+    formFromPopupMestoInstance.clearError();
+    formFromPopupMestoInstance.disabledSubmitButton(buttonSubmit);
     popupMestoInstance.open();
   });
-
-
 
 } //End of addEventListeners()
 addEventListeners();
