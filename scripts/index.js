@@ -6,6 +6,7 @@ import Popup from "./Popup.js";
 import PopupWithImage from "./PopupWithImage.js";
 import { popups } from "../utils/constants.js";
 import PopupWithForm from "./PopupWithForm.js";
+import UserInfo from "./UserInfo.js";
 
 const popupImage = document.querySelector(selectors.popupImage);
 const popopImageImage = document.querySelector(selectors.popopImageImage);
@@ -33,16 +34,37 @@ popupWithImageInstance.setEventListeners();
 const popupMestoInstance = new PopupWithForm(popupMesto, addCard);
 popupMestoInstance.setEventListeners();
 
-function addCard(formDataObject) {
-  section.addItem(createCard(formDataObject));
-}
+const userInfoInstance = new UserInfo(profileName, profileJob);
 
-buttonPlus.addEventListener('click', () => {
-  formFromPopupMesto.reset();
-  validatingFormPopupMesto.clearError();
-  validatingFormPopupMesto.disabledSubmitButton(buttonSubmit);
-  popupMestoInstance.open();
+const popupUserInfoInstance = new PopupWithForm(popupProfile, addUserInfo);
+popupUserInfoInstance.setEventListeners();
+
+function addUserInfo(data) {
+  userInfoInstance.setUserInfo(data);
+} 
+
+buttonEdit.addEventListener('click', function () {
+  validatingFormPopupProfile.clearError();
+  const currentUserInfo = userInfoInstance.getUserInfo();
+  //console.log(currentUserInfo);
+  popupProfileInputName.value = currentUserInfo.userName;
+  popupProfileInputJob.value = currentUserInfo.userDescription;
+  popupUserInfoInstance.open();
+  // popupProfileInputName.value = profileName.textContent;
+  // popupProfileInputJob.value = profileJob.textContent;
 });
+
+// formFromPopupProfile.addEventListener('submit', function (event) {
+//   event.preventDefault();
+//   // profileName.textContent = popupProfileInputName.value;
+//   // profileJob.textContent = popupProfileInputJob.value;
+//   //console.log(popupProfileInputJob.value);
+//   popupUserInfoInstance.close();
+// });
+  
+function addCard(formDataObject) {
+  sectionInstance.addItem(createCard(formDataObject));
+}
 
 function createCard(data) {
   const card = new Card(
@@ -55,29 +77,21 @@ function createCard(data) {
   return card.generate();
 }
 
-const section = new Section({
+const sectionInstance = new Section({
   items: initialCards,
   renderer: (item) => {
-    section.addItem(createCard(item));
+    sectionInstance.addItem(createCard(item));
   }
 }, cardsContainer);
-section.renderItems();
-
-
+sectionInstance.renderItems();
 
 function addEventListeners() {
 
-  buttonEdit.addEventListener('click', function () {
-    validatingFormPopupProfile.clearError();
-    openPopup(popupProfile);
-    popupProfileInputName.value = profileName.textContent;
-    popupProfileInputJob.value = profileJob.textContent;
-  });
-  formFromPopupProfile.addEventListener('submit', function (event) {
-    event.preventDefault();
-    profileName.textContent = popupProfileInputName.value;
-    profileJob.textContent = popupProfileInputJob.value;
-    closePopup(popupProfile);
+  buttonPlus.addEventListener('click', () => {
+    formFromPopupMesto.reset();
+    validatingFormPopupMesto.clearError();
+    validatingFormPopupMesto.disabledSubmitButton(buttonSubmit);
+    popupMestoInstance.open();
   });
 
 
