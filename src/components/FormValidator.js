@@ -64,7 +64,7 @@ export default class FormValidator {
 
     }
     clearError() {
-        this._form.querySelectorAll(this._settings.input).forEach((item) => {item.classList.remove(this._inputError)});
+        this._inputList.forEach((item) => {item.classList.remove(this._inputError)});
         this._form.querySelectorAll(this._settings.spanError).forEach((item) => {item.textContent = '';});
     }
 
