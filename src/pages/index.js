@@ -25,8 +25,8 @@ const buttonEdit = document.querySelector(selectors.buttonEdit);
 
 const formFromPopupMestoInstance = new FormValidator(formSettings, formFromPopupMesto);
 formFromPopupMestoInstance.enableValidation();
-const validatingFormPopupProfile = new FormValidator(formSettings, formFromPopupProfile);
-validatingFormPopupProfile.enableValidation();
+const formFromPopupProfileInstance = new FormValidator(formSettings, formFromPopupProfile);
+formFromPopupProfileInstance.enableValidation();
 
 const popupWithImageInstance = new PopupWithImage(popupImage, caption, popopImageImage);
 popupWithImageInstance.setEventListeners();
@@ -44,7 +44,7 @@ function addUserInfo(data) {
 } 
 
 buttonEdit.addEventListener('click', function () {
-  validatingFormPopupProfile.clearError();
+  formFromPopupProfileInstance.clearError();
   const currentUserInfo = userInfoInstance.getUserInfo();
   popupProfileInputName.value = currentUserInfo.userName;
   popupProfileInputJob.value = currentUserInfo.userDescription;
@@ -77,7 +77,6 @@ sectionInstance.renderItems();
 function addEventListeners() {
 
   buttonPlus.addEventListener('click', () => {
-    formFromPopupMesto.reset();
     formFromPopupMestoInstance.clearError();
     formFromPopupMestoInstance.disabledSubmitButton(buttonSubmit);
     popupMestoInstance.open();
