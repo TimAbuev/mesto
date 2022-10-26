@@ -41,12 +41,12 @@ export default class FormValidator {
             this._enableSubmitButton(this._buttonElement);
         }
         else {
-            this.disabledSubmitButton(this._buttonElement);
+            this.disabledSubmitButton();
         }
     }
-    disabledSubmitButton(button) {
-        button.setAttribute('disabled', true);
-        button.classList.add(this._invalidButtonClass);
+    disabledSubmitButton() {
+        this._buttonElement.setAttribute('disabled', true);
+        this._buttonElement.classList.add(this._invalidButtonClass);
     }
     _enableSubmitButton(button) {
         button.removeAttribute('disabled');

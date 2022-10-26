@@ -78,7 +78,7 @@ function addEventListeners() {
 
   buttonPlus.addEventListener('click', () => {
     formFromPopupMestoInstance.clearError();
-    formFromPopupMestoInstance.disabledSubmitButton(buttonSubmit);
+    formFromPopupMestoInstance.disabledSubmitButton();
     popupMestoInstance.open();
   });
 
