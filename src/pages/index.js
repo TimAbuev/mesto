@@ -19,7 +19,6 @@ const profileName = document.querySelector(selectors.profileName);
 const popupProfile = document.querySelector(selectors.popupProfile);
 const formFromPopupMesto = document.querySelector(selectors.formFromPopupMesto);
 const formFromPopupProfile = document.querySelector(selectors.formFromPopupProfile);
-const buttonSubmit = formFromPopupMesto.querySelector(selectors.buttonSubmit);
 const popupMesto = document.querySelector(selectors.popupMesto);
 const buttonEdit = document.querySelector(selectors.buttonEdit);
 
@@ -42,14 +41,6 @@ popupUserInfoInstance.setEventListeners();
 function addUserInfo(data) {
   userInfoInstance.setUserInfo(data);
 } 
-
-buttonEdit.addEventListener('click', function () {
-  formFromPopupProfileInstance.clearError();
-  const currentUserInfo = userInfoInstance.getUserInfo();
-  popupProfileInputName.value = currentUserInfo.userName;
-  popupProfileInputJob.value = currentUserInfo.userDescription;
-  popupUserInfoInstance.open();
-});
 
 function addCard(formDataObject) {
   sectionInstance.addItem(createCard(formDataObject));
@@ -80,6 +71,14 @@ function addEventListeners() {
     formFromPopupMestoInstance.clearError();
     formFromPopupMestoInstance.disabledSubmitButton();
     popupMestoInstance.open();
+  });
+
+  buttonEdit.addEventListener('click', function () {
+    formFromPopupProfileInstance.clearError();
+    const currentUserInfo = userInfoInstance.getUserInfo();
+    popupProfileInputName.value = currentUserInfo.userName;
+    popupProfileInputJob.value = currentUserInfo.userDescription;
+    popupUserInfoInstance.open();
   });
 
 } //End of addEventListeners()
