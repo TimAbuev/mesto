@@ -35,8 +35,8 @@ popupMestoInstance.setEventListeners();
 
 const userInfoInstance = new UserInfo(profileName, profileJob);
 
-const popupUserInfoInstance = new PopupWithForm(popupProfile, addUserInfo);
-popupUserInfoInstance.setEventListeners();
+const popupProfileInstance = new PopupWithForm(popupProfile, addUserInfo);
+popupProfileInstance.setEventListeners();
 
 function addUserInfo(data) {
   userInfoInstance.setUserInfo(data);
@@ -76,9 +76,8 @@ function addEventListeners() {
   buttonEdit.addEventListener('click', function () {
     formFromPopupProfileInstance.clearError();
     const currentUserInfo = userInfoInstance.getUserInfo();
-    popupProfileInputName.value = currentUserInfo.userName;
-    popupProfileInputJob.value = currentUserInfo.userDescription;
-    popupUserInfoInstance.open();
+    popupProfileInstance.setInputValues(currentUserInfo);
+    popupProfileInstance.open();
   });
 
 } //End of addEventListeners()

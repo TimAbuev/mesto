@@ -5,8 +5,8 @@ constructor(userName, userDescription) {
   }
   getUserInfo() {
     const obj = {
-      userName: this._name.textContent,
-      userDescription: this._description.textContent,
+      name: this._name.textContent,
+      job: this._description.textContent,
     };
     return obj;
     

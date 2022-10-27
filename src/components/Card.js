@@ -14,6 +14,7 @@ export default class Card {
   }
   generate() {
     this._element = this._getElement();
+    this._like = this._element.querySelector(this._selectors.like);
     this._elementsImage = this._element.querySelector(this._selectors.elementsImage);
     this._setEventListeners();
     this._elementsImage.setAttribute('src', this._image);
@@ -23,7 +24,6 @@ export default class Card {
     return this._element;
   }
   _setEventListeners() {
-    this._like = this._element.querySelector(this._selectors.like);
     this._element.querySelector(this._selectors.trashButton).addEventListener('click', this._removeElement);
     this._element.querySelector(this._selectors.wrapperButton).addEventListener('click', () => {
       this._openPopupImage(this._text, this._image);    
