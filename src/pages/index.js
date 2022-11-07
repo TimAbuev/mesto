@@ -1,4 +1,4 @@
-import './index.css';
+//import './index.css';
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import { formSettings, selectors, initialCards } from "../utils/constants.js";
@@ -6,6 +6,7 @@ import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
+import Api from '../components/Api.js';
 
 const popupImage = document.querySelector(selectors.popupImage);
 const popopImageImage = document.querySelector(selectors.popopImageImage);
@@ -19,6 +20,17 @@ const formFromPopupMesto = document.querySelector(selectors.formFromPopupMesto);
 const formFromPopupProfile = document.querySelector(selectors.formFromPopupProfile);
 const popupMesto = document.querySelector(selectors.popupMesto);
 const buttonEdit = document.querySelector(selectors.buttonEdit);
+
+const config = {
+  url: 'https://mesto.nomoreparties.co',
+  headers: {
+    "content-type": "application/json",
+    authorization: "697a4384-2695-44b9-a2ae-a1b7f71813d5"
+  }
+}
+
+const api = new Api(config);
+api.getAll();
 
 const formFromPopupMestoInstance = new FormValidator(formSettings, formFromPopupMesto);
 formFromPopupMestoInstance.enableValidation();
