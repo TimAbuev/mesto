@@ -20,6 +20,7 @@ const formFromPopupMesto = document.querySelector(selectors.formFromPopupMesto);
 const formFromPopupProfile = document.querySelector(selectors.formFromPopupProfile);
 const popupMesto = document.querySelector(selectors.popupMesto);
 const buttonEdit = document.querySelector(selectors.buttonEdit);
+const avatar = document.querySelector(selectors.avatar);
 
 const config = {
   url: 'https://mesto.nomoreparties.co',
@@ -30,7 +31,21 @@ const config = {
 }
 
 const api = new Api(config);
-api.getAll();
+
+api.getCards()
+  .then(function (data) {
+    console.log(data);
+    sectionInstance.renderItems(data);
+  })
+api.getUserInfo()
+.then(function (data) {
+  console.log(data);
+  console.log(avatar);
+  avatar.setAttribute('src', data.avatar);
+  profileName.textContent = data.name;
+  profileJob.textContent = data.about;
+})
+  
 
 const formFromPopupMestoInstance = new FormValidator(formSettings, formFromPopupMesto);
 formFromPopupMestoInstance.enableValidation();
@@ -50,7 +65,7 @@ popupProfileInstance.setEventListeners();
 
 function addUserInfo(data) {
   userInfoInstance.setUserInfo(data);
-} 
+}
 
 function addCard(formDataObject) {
   sectionInstance.addItem(createCard(formDataObject));
@@ -73,7 +88,7 @@ const sectionInstance = new Section({
     sectionInstance.addItem(createCard(item));
   }
 }, cardsContainer);
-sectionInstance.renderItems();
+
 
 function addEventListeners() {
 

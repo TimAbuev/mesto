@@ -9,11 +9,11 @@ constructor(userName, userDescription) {
       job: this._description.textContent,
     };
     return obj;
-    
+  
   }
   setUserInfo(data) {
     this._name.textContent = data.name;
     this._description.textContent = data.job;
   }
 
-}
+} 

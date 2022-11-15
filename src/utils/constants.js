@@ -38,6 +38,7 @@ export const selectors = {
   formFromPopupMesto: '.popup__form_type_form-mesto',
   buttonSubmit: '.popup__save',
   invalidButtonClass: 'popup__save_invalid',
+  avatar: '.profile__avatar',
 }
 
 export const popups = document.querySelectorAll(selectors.popups);
