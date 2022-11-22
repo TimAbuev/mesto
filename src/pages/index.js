@@ -37,15 +37,18 @@ api.getCards()
     console.log(data);
     sectionInstance.renderItems(data);
   })
-api.getUserInfo()
-.then(function (data) {
-  console.log(data);
-  console.log(avatar);
-  avatar.setAttribute('src', data.avatar);
-  profileName.textContent = data.name;
-  profileJob.textContent = data.about;
-})
-  
+  .catch(function (err) {
+    console.log('ошибка', err);
+  })
+api.getObject()
+  .then(function (data) {
+    avatar.setAttribute('src', data.avatar);
+    profileName.textContent = data.name;
+    profileJob.textContent = data.about;
+  })
+  .catch(function (err) {
+    console.log('ошибка', err);
+  })
 
 const formFromPopupMestoInstance = new FormValidator(formSettings, formFromPopupMesto);
 formFromPopupMestoInstance.enableValidation();
@@ -61,10 +64,19 @@ popupMestoInstance.setEventListeners();
 const userInfoInstance = new UserInfo(profileName, profileJob);
 
 const popupProfileInstance = new PopupWithForm(popupProfile, addUserInfo);
-popupProfileInstance.setEventListeners();
+popupProfileInstance.setSubmitEvent();
+
 
 function addUserInfo(data) {
+  api.editInfo({ name: data.name, about: data.job })
+  .then(function () {
+ 
   userInfoInstance.setUserInfo(data);
+  console.log(profileName.textContent);
+  })
+  .catch(function (err) {
+    console.log('ошибка', err);
+  })
 }
 
 function addCard(formDataObject) {
