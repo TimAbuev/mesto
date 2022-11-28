@@ -26,5 +26,12 @@ export default class Api {
     })
       .then(this.#onResponse);
   }
-
+  postCard(data) {
+    return fetch(`${this._url}/v1/cohort-54/cards`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify(data)
+    })
+      .then(this.#onResponse);
+  }
 }

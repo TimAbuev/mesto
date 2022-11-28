@@ -60,27 +60,34 @@ popupWithImageInstance.setEventListeners();
 
 const popupMestoInstance = new PopupWithForm(popupMesto, addCard);
 popupMestoInstance.setEventListeners();
+popupMestoInstance.setSubmitEvent();
 
 const userInfoInstance = new UserInfo(profileName, profileJob);
 
 const popupProfileInstance = new PopupWithForm(popupProfile, addUserInfo);
+popupProfileInstance.setEventListeners();
 popupProfileInstance.setSubmitEvent();
 
 
 function addUserInfo(data) {
   api.editInfo({ name: data.name, about: data.job })
+    .then(function () {
+      userInfoInstance.setUserInfo(data);
+    })
+    .catch(function (err) {
+      console.log('ошибка', err);
+    })
+}
+
+function addCard(data) {
+  api.postCard({ name: data.name, link: data.link })
   .then(function () {
- 
-  userInfoInstance.setUserInfo(data);
-  console.log(profileName.textContent);
+    
+    sectionInstance.addItem(createCard(data));
   })
   .catch(function (err) {
     console.log('ошибка', err);
   })
-}
-
-function addCard(formDataObject) {
-  sectionInstance.addItem(createCard(formDataObject));
 }
 
 function createCard(data) {
