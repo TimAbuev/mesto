@@ -1,5 +1,5 @@
 export default class Card {
-  constructor({handleCardClick}, data, template, selectors) {
+  constructor({ handleCardClick }, data, template, selectors) {
     this._text = data.name;
     this._image = data.link;
     this._template = template;
@@ -8,13 +8,14 @@ export default class Card {
   }
   _getElement() {
     const newTemplate = document.querySelector(this._template).content.
-    querySelector(this._selectors.divElementsCard)
-    .cloneNode(true);
+      querySelector(this._selectors.divElementsCard)
+      .cloneNode(true);
     return newTemplate;
   }
   generate() {
     this._element = this._getElement();
     this._like = this._element.querySelector(this._selectors.like);
+    
     this._elementsImage = this._element.querySelector(this._selectors.elementsImage);
     this._setEventListeners();
     this._elementsImage.setAttribute('src', this._image);
@@ -26,17 +27,20 @@ export default class Card {
   _setEventListeners() {
     this._element.querySelector(this._selectors.trashButton).addEventListener('click', this._removeElement);
     this._element.querySelector(this._selectors.wrapperButton).addEventListener('click', () => {
-      this._openPopupImage(this._text, this._image);    
+      this._openPopupImage(this._text, this._image);
     });
     this._like.addEventListener('click', () => {
       this._handleClickLike();
     });
   }//END OF _setEventListeners
-  
-  _handleClickLike () {
+
+  _handleClickLike() {
     this._like.classList.toggle(this._selectors.likeActive);
   }
   _removeElement = () => {
     this._element.remove();
-  } 
+  }
+  _countLikes() {
+
+  }
 }
