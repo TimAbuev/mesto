@@ -39,6 +39,7 @@ export const selectors = {
   buttonSubmit: '.popup__save',
   invalidButtonClass: 'popup__save_invalid',
   avatar: '.profile__avatar',
+  counter: '.elements__counter',
 }
 
 export const popups = document.querySelectorAll(selectors.popups);

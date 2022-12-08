@@ -1,10 +1,11 @@
 export default class Card {
-  constructor({ handleCardClick }, data, template, selectors) {
+  constructor({ handleCardClick}, data, template, selectors) {
     this._text = data.name;
     this._image = data.link;
     this._template = template;
     this._selectors = selectors;
     this._openPopupImage = handleCardClick;
+    this._likes = data.likes;
   }
   _getElement() {
     const newTemplate = document.querySelector(this._template).content.
@@ -15,7 +16,8 @@ export default class Card {
   generate() {
     this._element = this._getElement();
     this._like = this._element.querySelector(this._selectors.like);
-    
+    this._counter = this._element.querySelector(this._selectors.counter)
+    this._counter.textContent = this._likes.length;
     this._elementsImage = this._element.querySelector(this._selectors.elementsImage);
     this._setEventListeners();
     this._elementsImage.setAttribute('src', this._image);
@@ -40,7 +42,8 @@ export default class Card {
   _removeElement = () => {
     this._element.remove();
   }
-  _countLikes() {
-
-  }
+  // _useCounter() {
+  //   // return this._counter;
+  //   console.log(this._counter.textContent);
+  // }
 }

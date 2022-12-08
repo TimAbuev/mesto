@@ -30,12 +30,27 @@ const config = {
   }
 }
 
+const formFromPopupMestoInstance = new FormValidator(formSettings, formFromPopupMesto);
+formFromPopupMestoInstance.enableValidation();
+const formFromPopupProfileInstance = new FormValidator(formSettings, formFromPopupProfile);
+formFromPopupProfileInstance.enableValidation();
+const popupWithImageInstance = new PopupWithImage(popupImage, caption, popopImageImage);
+popupWithImageInstance.setEventListeners();
+const popupMestoInstance = new PopupWithForm(popupMesto, addCard);
+popupMestoInstance.setEventListeners();
+popupMestoInstance.setSubmitEvent();
+const userInfoInstance = new UserInfo(profileName, profileJob);
+const popupProfileInstance = new PopupWithForm(popupProfile, addUserInfo);
+popupProfileInstance.setEventListeners();
+popupProfileInstance.setSubmitEvent();
+
 const api = new Api(config);
 
 api.getCards()
   .then(function (data) {
-    console.log(data);
     sectionInstance.renderItems(data);
+    //counter.textContent = data[i].likes;
+    //console.log(data[0].likes);
   })
   .catch(function (err) {
     console.log('ошибка', err);
@@ -50,25 +65,6 @@ api.getObject()
     console.log('ошибка', err);
   })
 
-const formFromPopupMestoInstance = new FormValidator(formSettings, formFromPopupMesto);
-formFromPopupMestoInstance.enableValidation();
-const formFromPopupProfileInstance = new FormValidator(formSettings, formFromPopupProfile);
-formFromPopupProfileInstance.enableValidation();
-
-const popupWithImageInstance = new PopupWithImage(popupImage, caption, popopImageImage);
-popupWithImageInstance.setEventListeners();
-
-const popupMestoInstance = new PopupWithForm(popupMesto, addCard);
-popupMestoInstance.setEventListeners();
-popupMestoInstance.setSubmitEvent();
-
-const userInfoInstance = new UserInfo(profileName, profileJob);
-
-const popupProfileInstance = new PopupWithForm(popupProfile, addUserInfo);
-popupProfileInstance.setEventListeners();
-popupProfileInstance.setSubmitEvent();
-
-
 function addUserInfo(data) {
   api.editInfo({ name: data.name, about: data.job })
     .then(function () {
@@ -82,7 +78,6 @@ function addUserInfo(data) {
 function addCard(data) {
   api.postCard({ name: data.name, link: data.link })
   .then(function () {
-    
     sectionInstance.addItem(createCard(data));
   })
   .catch(function (err) {
@@ -95,7 +90,7 @@ function createCard(data) {
     {
       handleCardClick: (name, link) => {
         popupWithImageInstance.open(name, link);
-      }
+      } 
     },
     data, '.template-card', selectors);
   return card.generate();
