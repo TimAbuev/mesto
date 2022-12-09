@@ -49,8 +49,6 @@ const api = new Api(config);
 api.getCards()
   .then(function (data) {
     sectionInstance.renderItems(data);
-    //counter.textContent = data[i].likes;
-    //console.log(data[0].likes);
   })
   .catch(function (err) {
     console.log('ошибка', err);
