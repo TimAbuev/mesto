@@ -40,6 +40,8 @@ export const selectors = {
   invalidButtonClass: 'popup__save_invalid',
   avatar: '.profile__avatar',
   counter: '.elements__counter',
+  popupAreYouSureButton: '.popup-are-you-sure__button',
+  popupAreYouSure: '.popup-are-you-sure'
 }
 
 export const popups = document.querySelectorAll(selectors.popups);

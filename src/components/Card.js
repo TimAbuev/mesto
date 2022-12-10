@@ -27,6 +27,7 @@ export default class Card {
     return this._element;
   }
   _setEventListeners() {
+
     this._element.querySelector(this._selectors.trashButton).addEventListener('click', this._removeElement);
     this._element.querySelector(this._selectors.wrapperButton).addEventListener('click', () => {
       this._openPopupImage(this._text, this._image);
@@ -42,8 +43,5 @@ export default class Card {
   _removeElement = () => {
     this._element.remove();
   }
-  // _useCounter() {
-  //   // return this._counter;
-  //   console.log(this._counter.textContent);
-  // }
+
 }

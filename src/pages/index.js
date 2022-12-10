@@ -5,6 +5,7 @@ import { formSettings, selectors, initialCards } from "../utils/constants.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithAreYouSure from "../components/PopupWithAreYouSure.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from '../components/Api.js';
 
@@ -21,6 +22,8 @@ const formFromPopupProfile = document.querySelector(selectors.formFromPopupProfi
 const popupMesto = document.querySelector(selectors.popupMesto);
 const buttonEdit = document.querySelector(selectors.buttonEdit);
 const avatar = document.querySelector(selectors.avatar);
+const popupAreYouSure = document.querySelector(selectors.popupAreYouSure);
+const popupAreYouSureButton = document.querySelector(selectors.popupAreYouSureButton);
 
 const config = {
   url: 'https://mesto.nomoreparties.co',
@@ -43,6 +46,8 @@ const userInfoInstance = new UserInfo(profileName, profileJob);
 const popupProfileInstance = new PopupWithForm(popupProfile, addUserInfo);
 popupProfileInstance.setEventListeners();
 popupProfileInstance.setSubmitEvent();
+const popupAreYouSureInstance = new PopupWithAreYouSure(popupAreYouSure, popupAreYouSureButton);
+popupAreYouSureInstance.setEventListeners();
 
 const api = new Api(config);
 
@@ -90,7 +95,8 @@ function createCard(data) {
         popupWithImageInstance.open(name, link);
       } 
     },
-    data, '.template-card', selectors);
+    data, '.template-card', selectors
+    );
   return card.generate();
 }
 
@@ -116,6 +122,10 @@ function addEventListeners() {
     popupProfileInstance.setInputValues(currentUserInfo);
     popupProfileInstance.open();
   });
+
+  popupAreYouSureButton.addEventListener('click', function () {
+    popupAreYouSureInstance.close();
+  })
 
 } //End of addEventListeners()
 addEventListeners();
