@@ -14,7 +14,7 @@ export default class Api {
     return fetch(`${this._url}/v1/cohort-54/cards`, { headers: this._headers })
       .then(this.#onResponse);
   }
-  getObject() {
+  getProfile() {
     return fetch(`${this._url}/v1/cohort-54/users/me`, { headers: this._headers })
       .then(this.#onResponse);
   }
@@ -31,6 +31,13 @@ export default class Api {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify(data)
+    })
+      .then(this.#onResponse);
+  }
+  deleteCard(id) {
+    return fetch(`${this._url}/v1/cohort-54/cards/${id}`, {
+      method: 'DELETE',
+      headers: this._headers
     })
       .then(this.#onResponse);
   }

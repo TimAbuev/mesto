@@ -1,7 +1,7 @@
 //import './index.css';
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
-import { formSettings, selectors, initialCards } from "../utils/constants.js";
+import { formSettings, selectors} from "../utils/constants.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
@@ -24,6 +24,7 @@ const buttonEdit = document.querySelector(selectors.buttonEdit);
 const avatar = document.querySelector(selectors.avatar);
 const popupAreYouSure = document.querySelector(selectors.popupAreYouSure);
 const popupAreYouSureButton = document.querySelector(selectors.popupAreYouSureButton);
+const trashButton = document.querySelector(selectors.trashButton);
 
 const config = {
   url: 'https://mesto.nomoreparties.co',
@@ -49,7 +50,18 @@ popupProfileInstance.setSubmitEvent();
 const popupAreYouSureInstance = new PopupWithAreYouSure(popupAreYouSure, popupAreYouSureButton);
 popupAreYouSureInstance.setEventListeners();
 
+// function deleteCard (id) {
+//   api.deleteCard(id)
+//   .then(function () {
+//     popupAreYouSureInstance.close();
+//   })
+//   .catch(function (err) {
+//     console.log('ошибка', err);
+//   })
+// }
+
 const api = new Api(config);
+let userId;
 
 api.getCards()
   .then(function (data) {
@@ -58,11 +70,12 @@ api.getCards()
   .catch(function (err) {
     console.log('ошибка', err);
   })
-api.getObject()
+api.getProfile()
   .then(function (data) {
     avatar.setAttribute('src', data.avatar);
     profileName.textContent = data.name;
     profileJob.textContent = data.about;
+    userId = data._id;
   })
   .catch(function (err) {
     console.log('ошибка', err);
@@ -80,28 +93,44 @@ function addUserInfo(data) {
 
 function addCard(data) {
   api.postCard({ name: data.name, link: data.link })
-  .then(function () {
-    sectionInstance.addItem(createCard(data));
-  })
-  .catch(function (err) {
-    console.log('ошибка', err);
-  })
+    .then(function () {
+      sectionInstance.addItem(createCard(data));
+    })
+    .catch(function (err) {
+      console.log('ошибка', err);
+    })
 }
 
 function createCard(data) {
   const card = new Card(
     {
+      handleClickTrash: (id) => {
+        console.log(`openModal id = "${id}"`);
+        popupAreYouSureInstance.open();
+        popupAreYouSureInstance.handleClickYes(() => {
+          console.log('clickYes');
+          api.deleteCard(id)
+          .then(function () {
+            card.removeElement();
+            popupAreYouSureInstance.close();
+          })
+          .catch(function (err) {
+            console.log('ошибка', err);
+          })
+        })
+        
+      },
       handleCardClick: (name, link) => {
         popupWithImageInstance.open(name, link);
-      } 
+      },
+      userId: userId
     },
     data, '.template-card', selectors
-    );
+  );
   return card.generate();
 }
 
 const sectionInstance = new Section({
-  items: initialCards,
   renderer: (item) => {
     sectionInstance.addItem(createCard(item));
   }
@@ -123,9 +152,6 @@ function addEventListeners() {
     popupProfileInstance.open();
   });
 
-  popupAreYouSureButton.addEventListener('click', function () {
-    popupAreYouSureInstance.close();
-  })
-
 } //End of addEventListeners()
+
 addEventListeners();

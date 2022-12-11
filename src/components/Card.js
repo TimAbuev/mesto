@@ -1,11 +1,15 @@
 export default class Card {
-  constructor({ handleCardClick}, data, template, selectors) {
+  constructor({ handleClickTrash, handleCardClick, userId}, data, template, selectors) {
     this._text = data.name;
     this._image = data.link;
     this._template = template;
     this._selectors = selectors;
     this._openPopupImage = handleCardClick;
+    this._handleClickTrash = handleClickTrash;
     this._likes = data.likes;
+    this._id = data._id;
+    this._userId = userId;
+    this._ownerId = data.owner._id;
   }
   _getElement() {
     const newTemplate = document.querySelector(this._template).content.
@@ -15,6 +19,7 @@ export default class Card {
   }
   generate() {
     this._element = this._getElement();
+    this._trashButton = this._element.querySelector(this._selectors.trashButton);
     this._like = this._element.querySelector(this._selectors.like);
     this._counter = this._element.querySelector(this._selectors.counter)
     this._counter.textContent = this._likes.length;
@@ -28,10 +33,18 @@ export default class Card {
   }
   _setEventListeners() {
 
-    this._element.querySelector(this._selectors.trashButton).addEventListener('click', this._removeElement);
+    this._trashButton.addEventListener('click', () => {
+      this._handleClickTrash(this._id);
+    });
+
+    if (this._userId !== this._ownerId) {
+      this._trashButton.style.display = 'none';
+    }
+
     this._element.querySelector(this._selectors.wrapperButton).addEventListener('click', () => {
       this._openPopupImage(this._text, this._image);
     });
+
     this._like.addEventListener('click', () => {
       this._handleClickLike();
     });
@@ -40,7 +53,8 @@ export default class Card {
   _handleClickLike() {
     this._like.classList.toggle(this._selectors.likeActive);
   }
-  _removeElement = () => {
+
+  removeElement = () => {
     this._element.remove();
   }
 
