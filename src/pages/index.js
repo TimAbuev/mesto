@@ -50,16 +50,6 @@ popupProfileInstance.setSubmitEvent();
 const popupAreYouSureInstance = new PopupWithAreYouSure(popupAreYouSure, popupAreYouSureButton);
 popupAreYouSureInstance.setEventListeners();
 
-// function deleteCard (id) {
-//   api.deleteCard(id)
-//   .then(function () {
-//     popupAreYouSureInstance.close();
-//   })
-//   .catch(function (err) {
-//     console.log('ошибка', err);
-//   })
-// }
-
 const api = new Api(config);
 let userId;
 
@@ -111,6 +101,7 @@ function createCard(data) {
           console.log('clickYes');
           api.deleteCard(id)
           .then(function () {
+            console.log('сработал then для yes');
             card.removeElement();
             popupAreYouSureInstance.close();
           })
@@ -122,6 +113,29 @@ function createCard(data) {
       },
       handleCardClick: (name, link) => {
         popupWithImageInstance.open(name, link);
+      },
+      handleClickLike: (idCard) => {
+
+        if(card.isLiked()) {
+          api.deleteLike(idCard)
+          .then(function (res) {
+            console.log('выполнился then deleteLike');
+            card.setLike(res.likes);
+          })
+          .catch(function (err) {
+            console.log('ошибка', err);
+          })
+        } else {
+          api.addLike(idCard)
+          .then(function (res) {
+            console.log('выполнился then addLike');
+            card.setLike(res.likes);
+          })
+          .catch(function (err) {
+            console.log('ошибка', err);
+          })
+        }
+
       },
       userId: userId
     },

@@ -41,5 +41,19 @@ export default class Api {
     })
       .then(this.#onResponse);
   }
+  addLike(id) {
+    return fetch(`${this._url}/v1/cohort-54/cards/${id}/likes`, {
+      method: 'PUT',
+      headers: this._headers  
+    })
+      .then(this.#onResponse);
+  }
+  deleteLike(id) {
+    return fetch(`${this._url}/v1/cohort-54/cards/${id}/likes`, {
+      method: 'DELETE',
+      headers: this._headers  
+    })
+      .then(this.#onResponse);
+  }
 
 }
