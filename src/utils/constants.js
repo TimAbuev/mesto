@@ -41,7 +41,9 @@ export const selectors = {
   avatar: '.profile__avatar',
   counter: '.elements__counter',
   popupAreYouSureButton: '.popup-are-you-sure__button',
-  popupAreYouSure: '.popup-are-you-sure'
+  popupAreYouSure: '.popup-are-you-sure',
+  popupAvatar: '.popup-avatar',
+  formFromPopupAvatar: '.popup__form_type_form-avatar'
 }
 
 export const popups = document.querySelectorAll(selectors.popups);

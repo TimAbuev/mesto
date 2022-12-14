@@ -19,10 +19,10 @@
           <img class="profile__avatar" src="" alt="аватар">
           <div class="profile__wrapper">
             <div class="profile__wrapper-extra">
-              <h1 class="profile__name">Жак-Ив Кусто</h1>
+              <h1 class="profile__name"></h1>
               <button class="profile__button-edit" type="button"></button>
             </div>
-            <p class="profile__busy">Исследователь океана</p>
+            <p class="profile__busy"></p>
           </div>
         </div>
         <button class="profile__button" type="button"></button>
@@ -78,6 +78,18 @@
         <button class="popup__close-icon" type="button"></button>
         <h2 class="popup__title">Вы уверены?</h2>
         <button class="popup__save popup-are-you-sure__button" type="submit">Да</button>
+        </form>
+      </div>
+    </div>
+    <div class="popup popup-avatar">
+      <div class="popup__container popup__container_type_are-you-sure ">
+        <button class="popup__close-icon" type="button"></button>
+        <form class="popup__form popup__form_type_form-avatar" name="form-mesto" novalidate>
+          <h2 class="popup__title">Обновить аватар</h2> 
+          <input type="url" class="popup__input popup__input_type_card-src" name="link" placeholder="Ссылка на картинку"
+            required id="input-link"> 
+          <span class="error input-link-error"></span>
+          <button disabled class="popup__save popup__save_invalid" type="submit">Создать</button>
         </form>
       </div>
     </div>

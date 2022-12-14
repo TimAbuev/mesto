@@ -25,6 +25,8 @@ const avatar = document.querySelector(selectors.avatar);
 const popupAreYouSure = document.querySelector(selectors.popupAreYouSure);
 const popupAreYouSureButton = document.querySelector(selectors.popupAreYouSureButton);
 const trashButton = document.querySelector(selectors.trashButton);
+const popupAvatar = document.querySelector(selectors.popupAvatar);
+const formFromPopupAvatar = document.querySelector(selectors.formFromPopupAvatar);
 
 const config = {
   url: 'https://mesto.nomoreparties.co',
@@ -38,6 +40,8 @@ const formFromPopupMestoInstance = new FormValidator(formSettings, formFromPopup
 formFromPopupMestoInstance.enableValidation();
 const formFromPopupProfileInstance = new FormValidator(formSettings, formFromPopupProfile);
 formFromPopupProfileInstance.enableValidation();
+const formFrompopupAvatarInstance = new FormValidator(formSettings, formFromPopupAvatar);
+formFrompopupAvatarInstance.enableValidation();
 const popupWithImageInstance = new PopupWithImage(popupImage, caption, popopImageImage);
 popupWithImageInstance.setEventListeners();
 const popupMestoInstance = new PopupWithForm(popupMesto, addCard);
@@ -49,6 +53,10 @@ popupProfileInstance.setEventListeners();
 popupProfileInstance.setSubmitEvent();
 const popupAreYouSureInstance = new PopupWithAreYouSure(popupAreYouSure, popupAreYouSureButton);
 popupAreYouSureInstance.setEventListeners();
+const popupAvatarInstance = new PopupWithForm(popupAvatar);
+popupAvatarInstance.setEventListeners();
+//popupAvatarInstance.setSubmitEvent();
+
 
 const api = new Api(config);
 let userId;
@@ -60,6 +68,7 @@ api.getCards()
   .catch(function (err) {
     console.log('ошибка', err);
   })
+
 api.getProfile()
   .then(function (data) {
     avatar.setAttribute('src', data.avatar);
@@ -83,8 +92,8 @@ function addUserInfo(data) {
 
 function addCard(data) {
   api.postCard({ name: data.name, link: data.link })
-    .then(function () {
-      sectionInstance.addItem(createCard(data));
+    .then(function (res) {
+      sectionInstance.addItem(createCard(res));
     })
     .catch(function (err) {
       console.log('ошибка', err);
@@ -135,7 +144,6 @@ function createCard(data) {
             console.log('ошибка', err);
           })
         }
-
       },
       userId: userId
     },
@@ -159,12 +167,17 @@ function addEventListeners() {
     popupMestoInstance.open();
   });
 
-  buttonEdit.addEventListener('click', function () {
+  buttonEdit.addEventListener('click', function() {
     formFromPopupProfileInstance.clearError();
     const currentUserInfo = userInfoInstance.getUserInfo();
     popupProfileInstance.setInputValues(currentUserInfo);
     popupProfileInstance.open();
   });
+
+  avatar.addEventListener('click', function() {
+    formFrompopupAvatarInstance.clearError();
+    popupAvatarInstance.open();
+  })
 
 } //End of addEventListeners()
 
