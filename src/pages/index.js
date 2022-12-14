@@ -27,6 +27,7 @@ const popupAreYouSureButton = document.querySelector(selectors.popupAreYouSureBu
 const trashButton = document.querySelector(selectors.trashButton);
 const popupAvatar = document.querySelector(selectors.popupAvatar);
 const formFromPopupAvatar = document.querySelector(selectors.formFromPopupAvatar);
+const profilePencil =document.querySelector(selectors.profilePencil);
 
 const config = {
   url: 'https://mesto.nomoreparties.co',
@@ -53,10 +54,20 @@ popupProfileInstance.setEventListeners();
 popupProfileInstance.setSubmitEvent();
 const popupAreYouSureInstance = new PopupWithAreYouSure(popupAreYouSure, popupAreYouSureButton);
 popupAreYouSureInstance.setEventListeners();
-const popupAvatarInstance = new PopupWithForm(popupAvatar);
+const popupAvatarInstance = new PopupWithForm(popupAvatar, changeAvatar);
 popupAvatarInstance.setEventListeners();
-//popupAvatarInstance.setSubmitEvent();
+popupAvatarInstance.setSubmitEvent();
 
+function changeAvatar(data) {
+  api.postAvatar({ avatar: data.avatar })
+  .then(function(res) {
+    console.log('res', res);
+    avatar.style.backgroundImage = `url('${res.avatar}')`;
+  })
+  .catch(function (err) {
+    console.log('ошибка', err);
+  })
+}
 
 const api = new Api(config);
 let userId;
@@ -71,7 +82,7 @@ api.getCards()
 
 api.getProfile()
   .then(function (data) {
-    avatar.setAttribute('src', data.avatar);
+    avatar.style.backgroundImage = `url('${data.avatar}')`;
     profileName.textContent = data.name;
     profileJob.textContent = data.about;
     userId = data._id;
@@ -177,7 +188,14 @@ function addEventListeners() {
   avatar.addEventListener('click', function() {
     formFrompopupAvatarInstance.clearError();
     popupAvatarInstance.open();
-  })
+  });
+
+  avatar.addEventListener('mouseenter', function() {
+    profilePencil.style.visibility = 'visible';
+  });
+  avatar.addEventListener('mouseleave', function() {
+    profilePencil.style.visibility = 'hidden';
+  });
 
 } //End of addEventListeners()
 

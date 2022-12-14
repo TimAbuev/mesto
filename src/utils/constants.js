@@ -43,7 +43,8 @@ export const selectors = {
   popupAreYouSureButton: '.popup-are-you-sure__button',
   popupAreYouSure: '.popup-are-you-sure',
   popupAvatar: '.popup-avatar',
-  formFromPopupAvatar: '.popup__form_type_form-avatar'
+  formFromPopupAvatar: '.popup__form_type_form-avatar',
+  profilePencil: '.profile__pencil'
 }
 
 export const popups = document.querySelectorAll(selectors.popups);
