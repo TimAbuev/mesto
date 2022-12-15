@@ -56,23 +56,14 @@ popupAreYouSureInstance.setEventListeners();
 const popupAvatarInstance = new PopupWithForm(popupAvatar, changeAvatar);
 popupAvatarInstance.setEventListeners();
 popupAvatarInstance.setSubmitEvent();
-
-function changeAvatar(data) {
-  popupAvatarInstance.renderLoading(true);
-  api.postAvatar({ avatar: data.avatar })
-  .then(function(res) {
-    console.log('res', res);
-    avatar.style.backgroundImage = `url('${res.avatar}')`;
-  })
-  .catch(function (err) {
-    console.log('ошибка', err);
-  })
-  .finally(function() {
-    popupAvatarInstance.renderLoading(false);
-  })
-}
-
 const api = new Api(config);
+
+const sectionInstance = new Section({
+  renderer: (item) => {
+    sectionInstance.addItem(createCard(item));
+  }
+}, cardsContainer);
+
 let userId;
 
 api.getCards()
@@ -93,6 +84,21 @@ api.getProfile()
   .catch(function (err) {
     console.log('ошибка', err);
   })
+
+function changeAvatar(data) {
+  popupAvatarInstance.renderLoading(true);
+  api.postAvatar({ avatar: data.avatar })
+  .then(function(res) {
+    console.log('res', res);
+    avatar.style.backgroundImage = `url('${res.avatar}')`;
+  })
+  .catch(function (err) {
+    console.log('ошибка', err);
+  })
+  .finally(function() {
+    popupAvatarInstance.renderLoading(false);
+  })
+}
 
 function addUserInfo(data) {
   popupProfileInstance.renderLoading(true);
@@ -173,13 +179,6 @@ function createCard(data) {
   );
   return card.generate();
 }
-
-const sectionInstance = new Section({
-  renderer: (item) => {
-    sectionInstance.addItem(createCard(item));
-  }
-}, cardsContainer);
-
 
 function addEventListeners() {
 
