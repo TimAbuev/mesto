@@ -5,6 +5,8 @@ export default class PopupWithForm extends Popup {
     super(popupElement);
     this._submitHandler = submitHandler;
     this._form = popupElement.querySelector('form');
+    this._button = this._form.querySelector('button[type="submit"]');
+    this._buttonDefaultText = this._button.textContent;
     this._inputElements = this._form.querySelectorAll('input');
   }
   _getInputValues() { //собирает данные всех полей формы.
@@ -31,5 +33,14 @@ export default class PopupWithForm extends Popup {
   close() {
     super.close(); // при закрытии попапа форма должна сбрасываться.
     this._form.reset();
+  }
+
+  renderLoading(isSending) {
+    if(isSending) {
+      this._button.textContent = 'Загрузка...';
+    } else {
+      this._button.textContent = this._buttonDefaultText;
+    }
+    
   }
 }

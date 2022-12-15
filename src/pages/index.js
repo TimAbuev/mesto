@@ -24,7 +24,6 @@ const buttonEdit = document.querySelector(selectors.buttonEdit);
 const avatar = document.querySelector(selectors.avatar);
 const popupAreYouSure = document.querySelector(selectors.popupAreYouSure);
 const popupAreYouSureButton = document.querySelector(selectors.popupAreYouSureButton);
-const trashButton = document.querySelector(selectors.trashButton);
 const popupAvatar = document.querySelector(selectors.popupAvatar);
 const formFromPopupAvatar = document.querySelector(selectors.formFromPopupAvatar);
 const profilePencil =document.querySelector(selectors.profilePencil);
@@ -59,6 +58,7 @@ popupAvatarInstance.setEventListeners();
 popupAvatarInstance.setSubmitEvent();
 
 function changeAvatar(data) {
+  popupAvatarInstance.renderLoading(true);
   api.postAvatar({ avatar: data.avatar })
   .then(function(res) {
     console.log('res', res);
@@ -66,6 +66,9 @@ function changeAvatar(data) {
   })
   .catch(function (err) {
     console.log('ошибка', err);
+  })
+  .finally(function() {
+    popupAvatarInstance.renderLoading(false);
   })
 }
 
@@ -92,6 +95,7 @@ api.getProfile()
   })
 
 function addUserInfo(data) {
+  popupProfileInstance.renderLoading(true);
   api.editInfo({ name: data.name, about: data.job })
     .then(function () {
       userInfoInstance.setUserInfo(data);
@@ -99,15 +103,22 @@ function addUserInfo(data) {
     .catch(function (err) {
       console.log('ошибка', err);
     })
+    .finally(function() {
+      popupProfileInstance.renderLoading(false);
+    })
 }
 
 function addCard(data) {
+  popupMestoInstance.renderLoading(true);
   api.postCard({ name: data.name, link: data.link })
     .then(function (res) {
       sectionInstance.addItem(createCard(res));
     })
     .catch(function (err) {
       console.log('ошибка', err);
+    })
+    .finally(function() {
+      popupMestoInstance.renderLoading(false);
     })
 }
 
@@ -187,6 +198,7 @@ function addEventListeners() {
 
   avatar.addEventListener('click', function() {
     formFrompopupAvatarInstance.clearError();
+    formFrompopupAvatarInstance.disabledSubmitButton();
     popupAvatarInstance.open();
   });
 
