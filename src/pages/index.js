@@ -1,13 +1,14 @@
-import './index.css';
+// import './index.css';
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
-import { formSettings, selectors} from "../utils/constants.js";
+import { formSettings, selectors, config} from "../utils/constants.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithAreYouSure from "../components/PopupWithAreYouSure.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from '../components/Api.js';
+import Popup from '../components/Popup.js';
 
 const popupImage = document.querySelector(selectors.popupImage);
 const popopImageImage = document.querySelector(selectors.popopImageImage);
@@ -28,14 +29,7 @@ const popupAvatar = document.querySelector(selectors.popupAvatar);
 const formFromPopupAvatar = document.querySelector(selectors.formFromPopupAvatar);
 const profilePencil =document.querySelector(selectors.profilePencil);
 
-const config = {
-  url: 'https://mesto.nomoreparties.co',
-  headers: {
-    "content-type": "application/json",
-    authorization: "697a4384-2695-44b9-a2ae-a1b7f71813d5"
-  }
-}
-
+//const popupInstance = new Popup(selectors);
 const formFromPopupMestoInstance = new FormValidator(formSettings, formFromPopupMesto);
 formFromPopupMestoInstance.enableValidation();
 const formFromPopupProfileInstance = new FormValidator(formSettings, formFromPopupProfile);
@@ -89,8 +83,8 @@ function changeAvatar(data) {
   popupAvatarInstance.renderLoading(true);
   api.postAvatar({ avatar: data.avatar })
   .then(function(res) {
-    console.log('res', res);
     avatar.style.backgroundImage = `url('${res.avatar}')`;
+    popupAvatarInstance.close();
   })
   .catch(function (err) {
     console.log('ошибка', err);
@@ -105,6 +99,7 @@ function addUserInfo(data) {
   api.editInfo({ name: data.name, about: data.job })
     .then(function () {
       userInfoInstance.setUserInfo(data);
+      popupProfileInstance.close();
     })
     .catch(function (err) {
       console.log('ошибка', err);
@@ -119,6 +114,7 @@ function addCard(data) {
   api.postCard({ name: data.name, link: data.link })
     .then(function (res) {
       sectionInstance.addItem(createCard(res));
+      popupMestoInstance.close();
     })
     .catch(function (err) {
       console.log('ошибка', err);
@@ -134,10 +130,8 @@ function createCard(data) {
       handleClickTrash: (id) => {
         popupAreYouSureInstance.open();
         popupAreYouSureInstance.handleClickYes(() => {
-          console.log('clickYes');
           api.deleteCard(id)
           .then(function () {
-            console.log('сработал then для yes');
             card.removeElement();
             popupAreYouSureInstance.close();
           })
@@ -155,7 +149,6 @@ function createCard(data) {
         if(card.isLiked()) {
           api.deleteLike(idCard)
           .then(function (res) {
-            console.log('выполнился then deleteLike');
             card.setLike(res.likes);
           })
           .catch(function (err) {

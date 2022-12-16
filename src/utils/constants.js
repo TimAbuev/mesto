@@ -7,6 +7,14 @@ export const formSettings = {
   input: '.popup__input',
 };
 
+export const config = {
+  url: 'https://mesto.nomoreparties.co',
+  headers: {
+    "content-type": "application/json",
+    authorization: "697a4384-2695-44b9-a2ae-a1b7f71813d5"
+  }
+}
+
 export const selectors = {
   popups: '.popup',
   popupProfile: '.popup-profile',
@@ -49,3 +57,5 @@ export const selectors = {
 
 export const popups = document.querySelectorAll(selectors.popups);
 export const formFromPopupMesto = document.querySelector(selectors.formFromPopupMesto);
+
+
