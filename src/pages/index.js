@@ -132,7 +132,6 @@ function createCard(data) {
   const card = new Card(
     {
       handleClickTrash: (id) => {
-        console.log(`openModal id = "${id}"`);
         popupAreYouSureInstance.open();
         popupAreYouSureInstance.handleClickYes(() => {
           console.log('clickYes');
@@ -165,7 +164,6 @@ function createCard(data) {
         } else {
           api.addLike(idCard)
           .then(function (res) {
-            console.log('выполнился then addLike');
             card.setLike(res.likes);
           })
           .catch(function (err) {
