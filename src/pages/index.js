@@ -60,19 +60,13 @@ const sectionInstance = new Section({
 
 let userId;
 
-api.getCards()
-  .then(function (data) {
-    sectionInstance.renderItems(data);
-  })
-  .catch(function (err) {
-    console.log('ошибка', err);
-  })
+Promise.all([api.getProfile(), api.getCards()])
+  .then(function([userData, cards]) {
+    userInfoInstance.setUserAvatar(userData);
+    userInfoInstance.setUserInfo(userData);
+    userId = userData._id;
 
-api.getProfile()
-  .then(function (res) {
-    userInfoInstance.setUserAvatar(res);
-    userInfoInstance.setUserInfo(res);
-    userId = res._id;
+    sectionInstance.renderItems(cards);
   })
   .catch(function (err) {
     console.log('ошибка', err);
