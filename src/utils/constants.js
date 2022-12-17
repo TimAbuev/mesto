@@ -54,8 +54,3 @@ export const selectors = {
   formFromPopupAvatar: '.popup__form_type_form-avatar',
   profilePencil: '.profile__pencil'
 }
-
-export const popups = document.querySelectorAll(selectors.popups);
-export const formFromPopupMesto = document.querySelector(selectors.formFromPopupMesto);
-
-
