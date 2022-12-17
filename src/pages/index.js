@@ -41,7 +41,7 @@ popupWithImageInstance.setEventListeners();
 const popupMestoInstance = new PopupWithForm(popupMesto, addCard);
 popupMestoInstance.setEventListeners();
 popupMestoInstance.setSubmitEvent();
-const userInfoInstance = new UserInfo(profileName, profileJob);
+const userInfoInstance = new UserInfo(profileName, profileJob, avatar);
 const popupProfileInstance = new PopupWithForm(popupProfile, addUserInfo);
 popupProfileInstance.setEventListeners();
 popupProfileInstance.setSubmitEvent();
@@ -69,11 +69,11 @@ api.getCards()
   })
 
 api.getProfile()
-  .then(function (data) {
-    avatar.style.backgroundImage = `url('${data.avatar}')`;
-    profileName.textContent = data.name;
-    profileJob.textContent = data.about;
-    userId = data._id;
+  .then(function (res) {
+    userInfoInstance.setUserAvatar(res);
+    profileName.textContent = res.name;
+    profileJob.textContent = res.about;
+    userId = res._id;
   })
   .catch(function (err) {
     console.log('ошибка', err);
@@ -83,7 +83,7 @@ function changeAvatar(data) {
   popupAvatarInstance.renderLoading(true);
   api.postAvatar({ avatar: data.avatar })
   .then(function(res) {
-    avatar.style.backgroundImage = `url('${res.avatar}')`;
+    userInfoInstance.setUserAvatar(res);
     popupAvatarInstance.close();
   })
   .catch(function (err) {
