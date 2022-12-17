@@ -1,8 +1,8 @@
 import Popup from "./Popup.js";
 
 export default class PopupWithAreYouSure extends Popup {
-  constructor(popupElement, button, handleClickYes) {
-    super(popupElement);
+  constructor(popupElement, selectors, button, handleClickYes) {
+    super(popupElement, selectors);
       this._button = button;
       this._handleClickYes = handleClickYes;
   }
