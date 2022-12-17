@@ -14,7 +14,7 @@ constructor(userName, userDescription, avatar) {
   }
   setUserInfo(data) {
     this._name.textContent = data.name;
-    this._description.textContent = data.job;
+    this._description.textContent = data.about;
   }
   setUserAvatar(data) {
      this._avatar.style.backgroundImage = `url('${data.avatar}')`;

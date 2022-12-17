@@ -71,8 +71,7 @@ api.getCards()
 api.getProfile()
   .then(function (res) {
     userInfoInstance.setUserAvatar(res);
-    profileName.textContent = res.name;
-    profileJob.textContent = res.about;
+    userInfoInstance.setUserInfo(res);
     userId = res._id;
   })
   .catch(function (err) {
@@ -97,8 +96,8 @@ function changeAvatar(data) {
 function addUserInfo(data) {
   popupProfileInstance.renderLoading(true);
   api.editInfo({ name: data.name, about: data.job })
-    .then(function () {
-      userInfoInstance.setUserInfo(data);
+    .then(function (res) {
+      userInfoInstance.setUserInfo(res);
       popupProfileInstance.close();
     })
     .catch(function (err) {
